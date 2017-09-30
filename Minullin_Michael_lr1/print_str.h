@@ -1,3 +1,3 @@
 #pragma once
 
-int print_str(const char *str);
+void print_str(const char *str);
