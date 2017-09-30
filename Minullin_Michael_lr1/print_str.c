@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "print_str.h"
  
-int print_str(const char *str) {
+void print_str(const char *str) {
   puts(str);
 }
