@@ -33,7 +33,7 @@ int main() {
         printf("%d", sum_before_and_after(arr, arr_size));
         break;
     default:
-        printf("Данные некорректны");
+        printf("Р”Р°РЅРЅС‹Рµ РЅРµРєРѕСЂСЂРµРєС‚РЅС‹");
     }
     return 0;
 }
