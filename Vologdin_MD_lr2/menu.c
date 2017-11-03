@@ -12,8 +12,8 @@ int main()
     char t,y;
     int array[100];
     int i=1;
-    scanf_s("%d%c",&n,&y);
-    scanf_s("%d",&array[0]);
+    scanf("%d%c",&n,&y);
+    scanf("%d",&array[0]);
     t = getchar();
     while (t!= '\n')
     {
@@ -35,7 +35,7 @@ int main()
 		printf("%d", sum_before_and_after_negative(array, i));
         break;
     default:
-        printf("Данные некорректны");
+        printf("Р”Р°РЅРЅС‹Рµ РЅРµРєРєРѕСЂРµРєС‚РЅС‹");
     }
     return 0;
 }
