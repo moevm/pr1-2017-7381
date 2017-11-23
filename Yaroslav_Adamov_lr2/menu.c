@@ -7,12 +7,22 @@
 int main() {
 	int arr[100];
 	int arr_size = 0, fun_num, a, b;
+	
 	while ((a = getc(stdin)) != '\n') {
 		ungetc(a, stdin);
 		scanf("%d", &b);
 		arr[arr_size++] = b;
 	}
+	
 	scanf("%d", &fun_num);
+	b=0;
+	for (int i=0; i<=arr_size; i++){
+		if (arr[i]==0)
+			b++;
+	}
+	if (b==0 || ( b<2 && fun_num>1 ))
+		fun_num=4;
+	
 	switch (fun_num) {
 	case 0:
 		printf("%d", index_first_zero(arr, arr_size));
