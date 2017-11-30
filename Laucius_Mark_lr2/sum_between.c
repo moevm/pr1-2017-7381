@@ -1,5 +1,6 @@
 #include "index_first_zero.h"
 #include "index_last_zero.h"
+#include "sum_between.c"
 
 int sum_between(int mass[], int size) {
     int first = index_first_zero(mass, size),
