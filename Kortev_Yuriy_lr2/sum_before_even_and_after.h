@@ -2,4 +2,4 @@
 #include <stdlib.h>
 #include "index_first_even.h"
 #include "index_last_odd.h"
-int sbeaa();
+int sbeaa(int *a, int i);
