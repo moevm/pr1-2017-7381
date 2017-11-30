@@ -1,2 +1,2 @@
 #include <stdio.h>
-int ife();
+int ife(int *a, i);
