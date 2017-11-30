@@ -1,4 +1,4 @@
-#include <index_last_zero.h>
+#include "index_last_zero.h"
 int index_last_zero(int mass[], int size) {
     int i;
     for (i = size-1; i>=0; i--)
