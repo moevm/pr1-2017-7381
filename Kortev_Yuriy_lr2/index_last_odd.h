@@ -1,2 +1,2 @@
 #include <stdio.h>
-int ilo();
+int ilo(int *a, int i);
