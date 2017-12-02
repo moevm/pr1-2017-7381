@@ -5,14 +5,14 @@
 #include "functions.h"
 
 int main(){
-    int length, i;
-    scanf("%d\n", &length);
+    int length;
+    scanf("%d\n", &length);  
 
     char** names = (char**)malloc(sizeof(char*)*length);
     char** authors = (char**)malloc(sizeof(char*)*length);
     int* years = (int*)malloc(sizeof(int)*length);
 
-    for (i=0; i<length; i++)
+    for (int i=0;i<length;i++)
     {
         char name[80];
         char author[80];
@@ -58,13 +58,20 @@ int main(){
     k = count(head);
     printf("%d\n", k);
 
-    removeEl(head, name_for_remove);
+    removeEl(head, name_for_remove); 
     print_names(head);
 
     k = count(head);
     printf("%d\n", k);
 
+    for (int i=0;i<length;i++){
+        free(names[i]);
+        free(authors[i]);
+    }
+    free(names);
+    free(authors);
+    free(years);
+
     return 0;
 
 }
-
