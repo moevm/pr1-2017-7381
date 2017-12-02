@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stddef.h>
 #include "functions.h"
-
+ 
 int main(){
     int length;
     scanf("%d\n", &length);  
