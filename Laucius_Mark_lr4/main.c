@@ -64,11 +64,7 @@ int main(){
     k = count(head);
     printf("%d\n", k);
     delete_list(head);
-
-    for (int i=0;i<length;i++){
-        free(names[i]);
-        free(authors[i]);
-    }
+ 
     free(names);
     free(authors);
     free(years);
