@@ -96,3 +96,12 @@ void print_names(MusicalComposition* head)
         current = current->next;
     }
 }
+void delete_list(MusicalComposition* head)
+{
+    while(head->next)
+    {
+        head=head->next;
+        free(head->previous);
+    }
+    free(head);
+}
