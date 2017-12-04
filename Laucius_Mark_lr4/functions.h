@@ -47,12 +47,12 @@ void push(MusicalComposition* head, MusicalComposition* element)
 void removeEl(MusicalComposition* head, char* name_for_remove)
 {
     MusicalComposition* current = head;
-    //MusicalComposition* pointer;
-    while(current->next)
+    MusicalComposition* pointer=NULL;
+    while(current)
     {
         if(strcmp(current->name, name_for_remove) == 0)
         {
-            //pointer=current;
+            pointer=current;
             if(current->next != NULL && current->previous != NULL)
             {
                 current->previous->next = current->next;
@@ -60,6 +60,10 @@ void removeEl(MusicalComposition* head, char* name_for_remove)
             }
             else if(current->next == NULL)
             {
+                if(current->previous == NULL){
+                    free(head);
+                    return;
+                }
                 current->previous->next = NULL;
             }
             else if(current->previous == NULL)
@@ -68,7 +72,9 @@ void removeEl(MusicalComposition* head, char* name_for_remove)
                 current->next->previous = NULL;
                 head = current->next;
             }
-            free(current);
+            current=current->next;
+            free(pointer);
+            continue;
         }
         current = current->next;
     }
