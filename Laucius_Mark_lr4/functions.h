@@ -48,7 +48,7 @@ void removeEl(MusicalComposition* head, char* name_for_remove)
 {
     MusicalComposition* current = head;
     //MusicalComposition* pointer;
-    while(current->next)
+    while(current)
     {
         if(strcmp(current->name, name_for_remove) == 0)
         {
@@ -64,11 +64,12 @@ void removeEl(MusicalComposition* head, char* name_for_remove)
             }
             else if(current->previous == NULL)
             {
-                
                 current->next->previous = NULL;
                 head = current->next;
             }
-            free(current);
+            current=current->next;
+            free(current->previous);
+            continue;
         }
         current = current->next;
     }
