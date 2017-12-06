@@ -3,7 +3,6 @@
 #include <string.h>
 #include <stddef.h>
 
-// Описание структуры MusicalComposition
 typedef struct MusicalComposition
 {
     char *name;
@@ -13,7 +12,6 @@ typedef struct MusicalComposition
     struct MusicalComposition *prev;
 } MusicalComposition;
 
-// Создание структуры MusicalComposition
 
 MusicalComposition* createMusicalComposition(char* name, char* author,int year)
 {
@@ -27,7 +25,6 @@ MusicalComposition* createMusicalComposition(char* name, char* author,int year)
 }
 
 
-// Функции для работы со списком MusicalComposition
 void push(MusicalComposition* head, MusicalComposition* element)
 {
     MusicalComposition* temp = (MusicalComposition*)malloc(sizeof(MusicalComposition));
