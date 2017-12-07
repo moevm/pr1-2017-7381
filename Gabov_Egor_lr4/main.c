@@ -66,14 +66,14 @@ MusicalComposition* createMusicalCompositionList(char** array_names, char** arra
         strcpy(head->author , array_authors[0]);
         head->year = array_years[0];
 
-        MusicalComposition* tmp= (MusicalComposition*)malloc(sizeof(MusicalComposition));
+        MusicalComposition* tmp;//не выделяю память malloc
 
         for ( int i = 1; i < length ; i++ )
         {
                 tmp = createMusicalComposition( array_names[i] , array_authors[i] , array_years[i] );
                 push(head , tmp);
         }
-
+	
         return head;
 }
 
@@ -82,6 +82,7 @@ void removeEl(MusicalComposition* head, char* name_for_remove)
 {
         MusicalComposition *tmp ;
         tmp = head;
+
         while ( tmp )
         {
                 if ( strcmp( tmp->name , name_for_remove ) == 0 )
@@ -112,7 +113,8 @@ int count(MusicalComposition* head)
 }
 
 void print_names(MusicalComposition* head)
-{MusicalComposition* tmp = (MusicalComposition*)malloc(sizeof(MusicalComposition));
+{
+	MusicalComposition* tmp;// не выделяю malloc
         tmp = head->next;
 
                 printf( "%s\n" , head->name );
