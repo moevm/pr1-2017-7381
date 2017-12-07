@@ -86,6 +86,7 @@ void removeEl(MusicalComposition* head, char* name_for_remove)
 
     }
     temp->prev->next = temp->next;
+    free(temp);
     return;
 }
 
