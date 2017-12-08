@@ -57,6 +57,7 @@ int main() {
                 *text_out=*text;
         printf("%s\n", text_out);
         free(text_out);
+        text++;
     }
     
 free(text);
