@@ -27,7 +27,7 @@ int main() {
     text[i]='!';
     text[i++]='\0';
     //фильтр
-    for(i=0;i<=n;i++)
+    for(i=0;i<n;i++)
     {
         while(*text!='.'|| *text!=';' || *text!='?')
         {
