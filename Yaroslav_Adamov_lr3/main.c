@@ -1,68 +1,70 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <ctype.h>
 
-
-int main()
-{
-    int i=0, d=1;
+int main() {
     char c;
-    char *text1=malloc(101*sizeof(char));
-    while ((c=getchar()) != '!')
-    {
-        text1[i++]=c;
-        if ((i%100)==0)
-        {
-            text1=realloc(text1,100*sizeof(char)*(++d)+sizeof(char));
-        }
+    char *text = calloc(200, sizeof(char));
+    int text_size = 0;
+    while ((c = getchar()) != '!') {
+         if (c=='\n' || c=='\t')
+             continue;
+         if (text_size%200==0 && text_size>0)
+             text = realloc(text, (text_size+200)*sizeof(char));
+         text[text_size] = c;
+         text_size++;
     }
-    text1[i++]='!';
-    text1[i]='\0';
-    i=0;
-
-
-    int bil_probel, t, b, n=0, m=0;
-    char *text2 = malloc(strlen(text1)*sizeof(char));
-    char *text2_start = text2;
-    while(text1[i]!='\0')
-    {
-        n++;
-        b = t = bil_probel = 0;
-        while ((text1[i]!=';') && (text1[i]!='.') && (text1[i] != '?') && (text1[i] != '!'))
-        {
-            if ((!isspace(text1[i])) || (bil_probel))
-                {
-                    text2[t++]=text1[i];
-                    if (!bil_probel)
-                        bil_probel = 1;
-                }
-            i++;
-        }
-        text2[t++]=text1[i++];
-        text2[t]='\0';
-        for(t = 1; t < strlen(text2); t++)
-            if (isdigit(text2[t]) && !isdigit(text2[t-1]) && !isspace(text2[t-1]) && !isspace(text2[t+1]) && !(text2[t+1]=='!') && !(text2[t+1]==';') && !(text2[t+1]=='.') && !(text2[t+1]=='?'))
-            {
-                while(isdigit(text2[t]))
-                    t++;
-                if (!isspace(text2[t]) && !(text2[t]=='!') && !(text2[t]==';') && !(text2[t]=='.') && !(text2[t]=='?'))
-                    {
-                        b=1;
-                        break;
-                    }
+    if (text_size%200==0)
+             text = realloc(text, (text_size+200)*sizeof(char));
+    text[text_size]='!';
+    text_size++;
+    
+    // в text хранится оригинальный текст без табуляций и переносов строк
+    
+    
+    int i, j, proverka, n=0, m=0, start=0, end;
+    
+    while (1){
+        for (j=start;;j++){
+            if (text[j]=='.' || text[j]==';' || text[j]=='?' || text[j]=='!'){
+                end = j;
+                n++;
+                break;
             }
-
-        if (!b)
-        {
-            printf("%s\n",text2);
+        } // нашел границы предложения
+        
+        for (j=start+1, proverka = 1; j<=end; j++){
+            if ( isdigit(text[j]) && !isspace(text[j-1]) && !isspace(text[j+1]) && !isdigit(text[j-1]) && text[j+1]!='.' && text[j+1]!=';' && text[j+1]!='!' && text[j+1]!='?' ){
+                while (isdigit(text[j]))
+                    j++;
+                if (!isspace(text[j]) && text[j]!='.' && text[j]!=';' && text[j]!='?' && text[j]!='!'){
+                    proverka = 0;
+                    break;
+                }
+            }
+        } // проверел, есть ли цифры в словах этого предложения
+        
+        if (proverka){
+            for (j=start; j<=end; j++)
+                printf("%c", text[j]);
+            printf("\n");
             m++;
-        }
-
-        text2 = text2_start;
+        } // если цифр нет, вывел это предложение и перенес строку
+        
+        if (text[end]=='!')
+            break; // если это было последнее предложение, прерываю цикл
+        
+        start=end+1;
+        while (1)
+            if (isspace(text[start]))
+                start++;
+            else
+                break; // перешел к следующему предложению
     }
-    printf("Количество предложений до %d и количество предложений после %d\n",n-1,m-1);
-    free(text1);
-    free(text2);
+    
+    n--;
+    m--;
+    printf("Количество предложений до %d и количество предложений после %d",n,m);
+    free (text);
     return 0;
 }
