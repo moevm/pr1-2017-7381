@@ -36,11 +36,11 @@ int main() {
             {
                 text++;
             }
-            if((f==1||f==2)&*text!=5)
+            if((f==1||f==2)&*text!='5')
             {
                 f=0;
             }
-            if(*text==5)
+            if(*text=='5')
             {
                 f++;
             }
