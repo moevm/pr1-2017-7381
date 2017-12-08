@@ -8,8 +8,8 @@ int main() {
     int m=0;
     char c;
     int d=1;
-   
- char* text_out;
+    int f=0;
+    char* text_out;
   char* text=(char*)malloc(30*sizeof(char));
     while(c=getchar()!='!')
     {
@@ -19,7 +19,7 @@ int main() {
         }
         if(i==(30*d))
         {
-            text=realloc(text, 30*(d++)*sizeof(char));
+            text=realloc(text, (30*(d++))*sizeof(char));
         }
         text[i]=c;
         i++;
@@ -36,14 +36,23 @@ int main() {
             {
                 text++;
             }
-            if((*text_out=*text)==5 & (*(text_out++)=*(text++))==5 & (*(text_out++)=*(text++))==5)
+            if((f==1||f==2)&*text!=5)
+            {
+                f=0;
+            }
+            if(*text==5)
+            {
+                f++;
+            }
+            if(f==3)
             {
                 m++;
                 break;
             }
-        text++;
-            text_out++;
+            
             *text_out=*text;
+            text++;
+            text_out++;
         }
                 *text_out=*text;
         printf("%s\n", text_out);
