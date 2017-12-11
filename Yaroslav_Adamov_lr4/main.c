@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stddef.h>
 
-// Îïèñàíèå ñòðóêòóðû MusicalComposition
+// ÐžÐ¿Ð¸ÑÐ°Ð½Ð¸Ðµ ÑÑ‚Ñ€ÑƒÐºÑ‚ÑƒÑ€Ñ‹ MusicalComposition
 typedef struct MusicalComposition{
     char *name;
     char *author;
@@ -13,7 +13,7 @@ typedef struct MusicalComposition{
 } MusicalComposition;
 
 
-// Ñîçäàíèå ñòðóêòóðû MusicalComposition
+// Ð¡Ð¾Ð·Ð´Ð°Ð½Ð¸Ðµ ÑÑ‚Ñ€ÑƒÐºÑ‚ÑƒÑ€Ñ‹ MusicalComposition
 MusicalComposition* createMusicalComposition(char* name, char* author, int year){
     MusicalComposition* new_composition = (MusicalComposition*)malloc(sizeof(MusicalComposition));
     new_composition->name=(char*)malloc(81*sizeof(char));
@@ -27,9 +27,9 @@ MusicalComposition* createMusicalComposition(char* name, char* author, int year)
 }
 
 
-// Ôóíêöèè äëÿ ðàáîòû ñî ñïèñêîì MusicalComposition
+// Ð¤ÑƒÐ½ÐºÑ†Ð¸Ð¸ Ð´Ð»Ñ Ñ€Ð°Ð±Ð¾Ñ‚Ñ‹ ÑÐ¾ ÑÐ¿Ð¸ÑÐºÐ¾Ð¼ MusicalComposition
 //
-// Ñîçäàíèå ñïèñêà ìóçûêàëüíûõ êîìïîçèöèé
+// Ð¡Ð¾Ð·Ð´Ð°Ð½Ð¸Ðµ ÑÐ¿Ð¸ÑÐºÐ° Ð¼ÑƒÐ·Ñ‹ÐºÐ°Ð»ÑŒÐ½Ñ‹Ñ… ÐºÐ¾Ð¼Ð¿Ð¾Ð·Ð¸Ñ†Ð¸Ð¹
 MusicalComposition* createMusicalCompositionList(char** array_names, char** array_authors, int* array_years, int n){
     MusicalComposition *head = createMusicalComposition(array_names[0], array_authors[0], array_years[0]);
     MusicalComposition *comp = head;
@@ -42,7 +42,7 @@ MusicalComposition* createMusicalCompositionList(char** array_names, char** arra
     return head;
 }
 
-// Äîáàâëåíèå íîâîé êîìïîçèöèè â êîíåö ñïèñêà
+// Ð”Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ Ð½Ð¾Ð²Ð¾Ð¹ ÐºÐ¾Ð¼Ð¿Ð¾Ð·Ð¸Ñ†Ð¸Ð¸ Ð² ÐºÐ¾Ð½ÐµÑ† ÑÐ¿Ð¸ÑÐºÐ°
 void push(MusicalComposition* head, MusicalComposition* element){
     MusicalComposition* comp = head;
     while (comp->next!=NULL)
@@ -52,7 +52,7 @@ void push(MusicalComposition* head, MusicalComposition* element){
 }
 
 
-// Óäàëåíèå ýëåìåíòà, ó êîòîðîãî name ðàâíî name_for_remove
+// Ð£Ð´Ð°Ð»ÐµÐ½Ð¸Ðµ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð°, Ñƒ ÐºÐ¾Ñ‚Ð¾Ñ€Ð¾Ð³Ð¾ name Ñ€Ð°Ð²Ð½Ð¾ name_for_remove
 void removeEl(MusicalComposition* head, char* name_for_remove){
     for (MusicalComposition* comp = head; comp!=NULL; comp=comp->next)
         if (strcmp(comp->name,name_for_remove)==0){
@@ -62,7 +62,7 @@ void removeEl(MusicalComposition* head, char* name_for_remove){
         }
 }
 
-// Âîçâðàùàåò êîëè÷åñòâî êîìïîçèöèé
+// Ð’Ð¾Ð·Ð²Ñ€Ð°Ñ‰Ð°ÐµÑ‚ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ ÐºÐ¾Ð¼Ð¿Ð¾Ð·Ð¸Ñ†Ð¸Ð¹
 int count(MusicalComposition* head){
     int count=0;
     for (MusicalComposition* comp = head; comp!=NULL; comp=comp->next)
@@ -70,7 +70,7 @@ int count(MusicalComposition* head){
     return count;
 }
 
-// Âûâîäèò íàçâàíèÿ êîìïîçèöèé
+// Ð’Ñ‹Ð²Ð¾Ð´Ð¸Ñ‚ Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Ñ ÐºÐ¾Ð¼Ð¿Ð¾Ð·Ð¸Ñ†Ð¸Ð¹
 void print_names(MusicalComposition* head){
     for (MusicalComposition* comp=head; comp!=NULL; comp=comp->next)
         printf("%s\n",comp->name);
