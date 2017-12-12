@@ -145,6 +145,12 @@ int main(){
     free(authors);
     free(years);
 
+    head = head->next;
+    while(head->next!=NULL){
+        free (head->prev);
+        head = head->next;
+    }
+    free (head);
+    
     return 0;
-
 }
