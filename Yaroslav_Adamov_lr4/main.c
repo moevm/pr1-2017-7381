@@ -147,9 +147,13 @@ int main(){
 
     head = head->next;
     while(head->next!=NULL){
+        free (head->prev->name);
+        free (head->prev->author);
         free (head->prev);
         head = head->next;
     }
+    free (head->name);
+    free (head->author);
     free (head);
     
     return 0;
