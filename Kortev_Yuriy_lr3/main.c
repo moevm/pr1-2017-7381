@@ -19,7 +19,8 @@ int main() {
         }
         if(i==(30*d))
         {
-            text=realloc(text, (30*(d++))*sizeof(char));
+            d++;
+            text=realloc(text, (30*d)*sizeof(char));
         }
         text[i]=c;
         i++;
