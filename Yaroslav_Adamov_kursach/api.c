@@ -8,8 +8,8 @@ MusicalComposition* createMusicalComposition(char* name, char* author, int year)
     MusicalComposition* new_composition = (MusicalComposition*)malloc(sizeof(MusicalComposition));
     new_composition->name=(char*)malloc(81*sizeof(char));
     new_composition->author=(char*)malloc(81*sizeof(char));
-    strcpy(new_composition->name, name);
-    strcpy(new_composition->author, author);
+    strncpy(new_composition->name, name);
+    strncpy(new_composition->author, author);
     new_composition->year=year;
     new_composition->next = NULL;
     new_composition->prev = NULL;
@@ -34,11 +34,16 @@ MusicalComposition* createMusicalCompositionList(char** array_names, char** arra
 
 // Добавление новой композиции в конец списка
 void push(MusicalComposition* head, MusicalComposition* element){
-    MusicalComposition* comp = head;
-    while (comp->next!=NULL)
-        comp=comp->next;
-    comp->next=element;
-    element->prev=comp;
+    if (head==NULL){ // если список пуст
+        head = element;
+    }
+    else { // если список не пуст
+        MusicalComposition* comp = head;
+        while (comp->next!=NULL)
+            comp=comp->next;
+        comp->next=element;
+        element->prev=comp;
+    }
 }
 
 
@@ -46,8 +51,24 @@ void push(MusicalComposition* head, MusicalComposition* element){
 void removeEl(MusicalComposition* head, char* name_for_remove){
     for (MusicalComposition* comp = head; comp!=NULL; comp=comp->next)
         if (strcmp(comp->name,name_for_remove)==0){
-            comp->next->prev = comp->prev;
-            comp->prev->next = comp->next;
+            if (comp->prev == NULL){ // удаляется head
+                if (comp->next == NULL){ // в списке всего 1 элемент
+                    head = NULL;
+                } else{ // удаляется head, в списке больше 1 элемента
+                    comp->next->prev=NULL;
+                    head = comp->next;
+                }
+            } else{
+                if (comp->next == NULL){ // удаляется последний элемент
+                    comp->prev->next = NULL;
+                } else{ // остальные случаи
+                    comp->next->prev = comp->prev;
+                    comp->prev->next = comp->next;
+                }
+            }
+            free (comp->name);
+            free (comp->autchor);
+            free (comp);
             break;
         }
 }
