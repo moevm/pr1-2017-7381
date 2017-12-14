@@ -27,11 +27,13 @@ int main() {
     text[i]='!';
     text[i++]='\0';
     //фильтр
+    char *print_out;
     for(i=0;i<n;i++)
     {
         while(*text!='.'|| *text!=';' || *text!='?')
         {
             text_out=malloc((strlen(text)+1)*sizeof(char));
+            print_out=text_out;
             if(*text=='\t')
             {
                 text++;
@@ -55,8 +57,9 @@ int main() {
             text_out++;
         }
                 *text_out=*text;
-        printf("%s\n", text_out);
+        printf("%s\n", print_out);
         free(text_out);
+        free(print_out);
         text++;
     }
     
