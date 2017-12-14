@@ -42,6 +42,12 @@ int main(){
     
     // работа со списком
     int rabota = 1;
+    int fun = 0;
+    char name_for_push[80];
+    char author_for_push[80];
+    int year_for_push;
+    char name_for_remove[80];
+    
     printf("Выберите действие, которое хотите совершить:\n");
     printf("1 - вывести на экран количество композиций.\n");
     printf("2 - вывести на экран названия композиций.\n");
@@ -50,22 +56,16 @@ int main(){
     printf("5 - отсортировать список по году (по убыванию).\n");
     printf("6 - завершить работу программы.\n");
     while (rabota){
-        int fun = 0;
         scanf("%d\n", &fun);
         switch(fun){
             case 1:
-                int k = count(head);
-                printf("Количество композиций: %d\n", k);
+                printf("Количество композиций: %d\n", count(head));
                 break;
             case 2:
                 printf("Названия композиций:\n");
                 print_names(head);
                 break;
             case 3:
-                char name_for_push[80];
-                char author_for_push[80];
-                int year_for_push;
-                
                 printf("Чтобы добавить композицию, введите её название (до 80 символов): ");
                 fgets(name_for_push, 80, stdin);
                 (*strstr(name_for_push,"\n"))=0;
@@ -80,7 +80,6 @@ int main(){
                 push(head, element_for_push);
                 break;
             case 4:
-                char name_for_remove[80];
                 printf("Чтобы удалить композицию, введите её название: ");
                 fgets(name_for_remove, 80, stdin);
                 (*strstr(name_for_remove,"\n"))=0;
