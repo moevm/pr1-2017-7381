@@ -9,6 +9,7 @@ int main() {
     char c;
     int d=1;
     int f=0;
+    int del;
     char* text_out;
   char* text=(char*)malloc(30*sizeof(char));
     while(c=getchar()!='!')
@@ -29,7 +30,7 @@ int main() {
     text[i++]='\0';
     //фильтр
     char *print_out;
-    for(i=0;i<n;i++)
+    for(i=0;i<(n-1);i++)
     {
         text_out=malloc((strlen(text)+1)*sizeof(char));
         while(*text!='.'|| *text!=';' || *text!='?')
@@ -50,7 +51,7 @@ int main() {
             if(f==3)
             {
                 m++;
-                break;
+                del=1;
             }
             
             *text_out=*text;
@@ -58,7 +59,14 @@ int main() {
             text_out++;
         }
                 *text_out=*text;
+        if(!del)
+        {
         printf("%s\n", print_out);
+        }
+        else
+        {
+            del=0;
+        }
         free(text_out);
         free(print_out);
         text++;
