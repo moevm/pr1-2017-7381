@@ -8,8 +8,8 @@ MusicalComposition* createMusicalComposition(char* name, char* author, int year)
     MusicalComposition* new_composition = (MusicalComposition*)malloc(sizeof(MusicalComposition));
     new_composition->name=(char*)malloc(81*sizeof(char));
     new_composition->author=(char*)malloc(81*sizeof(char));
-    strncpy(new_composition->name, name);
-    strncpy(new_composition->author, author);
+    strncpy(new_composition->name, name, 80);
+    strncpy(new_composition->author, author, 80);
     new_composition->year=year;
     new_composition->next = NULL;
     new_composition->prev = NULL;
