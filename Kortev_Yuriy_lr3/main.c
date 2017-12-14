@@ -30,9 +30,9 @@ int main() {
     char *print_out;
     for(i=0;i<n;i++)
     {
+        text_out=malloc((strlen(text)+1)*sizeof(char));
         while(*text!='.'|| *text!=';' || *text!='?')
         {
-            text_out=malloc((strlen(text)+1)*sizeof(char));
             print_out=text_out;
             if(*text=='\t')
             {
