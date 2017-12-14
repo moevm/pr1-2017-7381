@@ -9,7 +9,7 @@ int main(){
     // создание списка
     
     int length;
-    printf("Создание списка композиций.\nВведите количество композиций: ")
+    printf("Создание списка композиций.\nВведите количество композиций: ");
     scanf("%d\n", &length);  
 
     char** names = (char**)malloc(sizeof(char*)*length);
@@ -81,7 +81,7 @@ int main(){
                 break;
             case 4:
                 char name_for_remove[80];
-                printf("Чтобы удалить композицию, введите её название: ")
+                printf("Чтобы удалить композицию, введите её название: ");
                 fgets(name_for_remove, 80, stdin);
                 (*strstr(name_for_remove,"\n"))=0;
                 removeEl(head, name_for_remove);
@@ -94,9 +94,9 @@ int main(){
                 rabota = 0;
                 printf("Работа завершена");
                 break;
-            default: printf("Для данной клавиши не придусмотренно никаких действий.\n")
+            default: printf("Для данной клавиши не придусмотренно никаких действий.\n");
         }
-        printf("Выберите ещё одно действие или завершите работу программы.\n")
+        printf("Выберите ещё одно действие или завершите работу программы.\n");
     }
         
         
