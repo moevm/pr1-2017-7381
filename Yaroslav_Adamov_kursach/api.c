@@ -70,7 +70,7 @@ void removeEl(MusicalComposition* head, char* name_for_remove){
             break;
         }
     free (comp->name);
-    free (comp->autchor);
+    free (comp->author);
     free (comp);
 }
 
