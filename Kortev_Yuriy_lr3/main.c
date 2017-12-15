@@ -72,7 +72,7 @@ int main() {
         free(print_out);
         text++;
     }
-    
+    printf("%s", text);
 free(text);
    
     printf("Количество предложений до %d и количество предложений после %d", n, n-m);
