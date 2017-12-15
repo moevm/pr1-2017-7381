@@ -34,7 +34,8 @@ int flag=1;
 char *str = malloc(1* sizeof (char)); 
 
 while ((n=getchar()) != '\n' ){
-str = realloc(str,sizeof(char*)*(i+2)); 
+str = realloc(str,sizeof(char*)*(i+2));
+i++;    
 if (flag){ 
 if (n==' ' || n=='\t'){ 
 continue; 
