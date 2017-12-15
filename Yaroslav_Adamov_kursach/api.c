@@ -34,16 +34,11 @@ MusicalComposition* createMusicalCompositionList(char** array_names, char** arra
 
 // Добавление новой композиции в конец списка
 void push(MusicalComposition* head, MusicalComposition* element){
-    if (head==NULL){ // если список пуст
-        head = element;
-    }
-    else { // если список не пуст
-        MusicalComposition* comp = head;
-        while (comp->next!=NULL)
-            comp=comp->next;
-        comp->next=element;
-        element->prev=comp;
-    }
+    MusicalComposition* comp = head;
+    while (comp->next!=NULL)
+        comp=comp->next;
+    comp->next=element;
+    element->prev=comp;
 }
 
 
