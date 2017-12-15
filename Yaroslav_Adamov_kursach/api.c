@@ -49,7 +49,8 @@ void push(MusicalComposition* head, MusicalComposition* element){
 
 // Удаление элемента, у которого name равно name_for_remove
 void removeEl(MusicalComposition* head, char* name_for_remove){
-    for (MusicalComposition* comp = head; comp!=NULL; comp=comp->next)
+    MusicalComposition* comp;
+    for (comp = head; comp!=NULL; comp=comp->next)
         if (strcmp(comp->name,name_for_remove)==0){
             if (comp->prev == NULL){ // удаляется head
                 if (comp->next == NULL){ // в списке всего 1 элемент
@@ -66,11 +67,11 @@ void removeEl(MusicalComposition* head, char* name_for_remove){
                     comp->prev->next = comp->next;
                 }
             }
-            free (comp->name);
-            free (comp->autchor);
-            free (comp);
             break;
         }
+    free (comp->name);
+    free (comp->autchor);
+    free (comp);
 }
 
 // Возвращает количество композиций
