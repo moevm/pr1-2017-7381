@@ -52,6 +52,7 @@ int main() {
             {
                 m++;
                 del=1;
+                f=0;
             }
             
             *text_out=*text;
