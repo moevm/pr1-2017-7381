@@ -16,8 +16,9 @@ int main(){
     char** authors = (char**)malloc(sizeof(char*)*length);
     int* years = (int*)malloc(sizeof(int)*length);
 
+    MusicalComposition* head;
     if (length==0){
-        MusicalComposition* head = NULL;
+        head = NULL;
         printf("Вы создали пустой список.\n");
     } else{
     for (int i=0;i<length;i++)
@@ -41,7 +42,7 @@ int main(){
         strcpy(names[i], name);
         strcpy(authors[i], author);
     }
-    MusicalComposition* head = createMusicalCompositionList(names, authors, years, length);
+    head = createMusicalCompositionList(names, authors, years, length);
     }
     
     
