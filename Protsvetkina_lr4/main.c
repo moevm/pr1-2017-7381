@@ -46,8 +46,8 @@ int main(){
         names[i] = (char*)malloc(sizeof(char*) * (strlen(name)+1));
         authors[i] = (char*)malloc(sizeof(char*) * (strlen(author)+1));
 
-        strcpy(names[i], name);
-        strcpy(authors[i], author);
+        strncpy(names[i], name, 80);
+        strncpy(authors[i], author, 80);
 
     }
     MusicalComposition* head = createMusicalCompositionList(names, authors, years, length);
