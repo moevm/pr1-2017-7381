@@ -24,7 +24,8 @@ return 0;
 
 
 int main(){ 
-int i=0; 
+int i=0;
+int k=0; 
 int length=0; 
 char n=0; 
 int current=0; 
@@ -34,8 +35,8 @@ int flag=1;
 char *str = malloc(1* sizeof (char)); 
 
 while ((n=getchar()) != '\n' ){
-str = realloc(str,sizeof(char*)*(i+2));
-i++;    
+str = realloc(str,sizeof(char*)*(k+2));
+k++;    
 if (flag){ 
 if (n==' ' || n=='\t'){ 
 continue; 
