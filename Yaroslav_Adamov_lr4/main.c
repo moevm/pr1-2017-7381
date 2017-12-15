@@ -60,6 +60,9 @@ void removeEl(MusicalComposition* head, char* name_for_remove){
             comp->prev->next = comp->next;
             break;
         }
+    free (comp->name);
+    free (comp->autchor);
+    free (comp);
 }
 
 // Возвращает количество композиций
@@ -74,6 +77,20 @@ int count(MusicalComposition* head){
 void print_names(MusicalComposition* head){
     for (MusicalComposition* comp=head; comp!=NULL; comp=comp->next)
         printf("%s\n",comp->name);
+}
+
+// освобождение памяти
+void free_memory(MusicalComposition* head){
+    head = head->next;
+    while(head->next!=NULL){
+        free (head->prev->name);
+        free (head->prev->author);
+        free (head->prev);
+        head = head->next;
+    }
+    free (head->name);
+    free (head->author);
+    free (head);
 }
 
 
@@ -145,16 +162,7 @@ int main(){
     free(authors);
     free(years);
 
-    head = head->next;
-    while(head->next!=NULL){
-        free (head->prev->name);
-        free (head->prev->author);
-        free (head->prev);
-        head = head->next;
-    }
-    free (head->name);
-    free (head->author);
-    free (head);
+    free_memory(head);
     
     return 0;
 }
