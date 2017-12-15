@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stddef.h>
-#include "kursach.h"
+#include "main.h"
 
 
 int main()
@@ -116,7 +116,8 @@ int main()
 	free(name_for_remove);
 	free(head);
 	free(element_for_push);
-		
+	free(element_for_push->name);	
+	free(element_for_push->author);	
 
     	return 0;
 
