@@ -31,9 +31,10 @@ int current=0;
 int before=0; 
 int after=0; 
 int flag=1; 
-char *str = malloc(2000* sizeof (char)); 
+char *str = malloc(1* sizeof (char)); 
 
-while ((n=getchar()) != '\n' ){ 
+while ((n=getchar()) != '\n' ){
+str = realloc(str,sizeof(char*)*(i+2)); 
 if (flag){ 
 if (n==' ' || n=='\t'){ 
 continue; 
@@ -46,6 +47,7 @@ length=current;
 current=current+1; 
 if (n=='.' || n==';' || n=='?' || n=='!'){ 
 after=after + pr_str(str, current); 
+i++;
 current=0; 
 flag=1; 
 before++; 
