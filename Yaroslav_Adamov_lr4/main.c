@@ -54,14 +54,15 @@ void push(MusicalComposition* head, MusicalComposition* element){
 
 // Удаление элемента, у которого name равно name_for_remove
 void removeEl(MusicalComposition* head, char* name_for_remove){
-    for (MusicalComposition* comp = head; comp!=NULL; comp=comp->next)
+    MusicalComposition* comp;
+    for (comp = head; comp!=NULL; comp=comp->next)
         if (strcmp(comp->name,name_for_remove)==0){
             comp->next->prev = comp->prev;
             comp->prev->next = comp->next;
             break;
         }
     free (comp->name);
-    free (comp->autchor);
+    free (comp->author);
     free (comp);
 }
 
