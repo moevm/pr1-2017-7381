@@ -16,33 +16,31 @@ int main(){
     char** authors = (char**)malloc(sizeof(char*)*length);
     int* years = (int*)malloc(sizeof(int)*length);
 
-    MusicalComposition* head;
+    MusicalComposition* head = NULL;
     if (length==0){
-        head = NULL;
         printf("Вы создали пустой список.\n");
     } else{
-    for (int i=0;i<length;i++)
-    {
-        char name[80];
-        char author[80];
+        for (int i=0;i<length;i++){
+            char name[80];
+            char author[80];
         
-        printf("Введите название %d-й композиции (до 80 символов): ", i+1);
-        fgets(name, 80, stdin);
-        printf("Введите автора этой композиции (до 80 символов): ");
-        fgets(author, 80, stdin);
-        printf("Введите год создания этой композиции: ");
-        fscanf(stdin, "%d\n", &years[i]);
-
-        (*strstr(name,"\n"))=0;
-        (*strstr(author,"\n"))=0;
-
-        names[i] = (char*)malloc(sizeof(char*) * (strlen(name)+1));
-        authors[i] = (char*)malloc(sizeof(char*) * (strlen(author)+1));
-
-        strcpy(names[i], name);
-        strcpy(authors[i], author);
-    }
-    head = createMusicalCompositionList(names, authors, years, length);
+            printf("Введите название %d-й композиции (до 80 символов): ", i+1);
+            fgets(name, 80, stdin);
+            printf("Введите автора этой композиции (до 80 символов): ");
+            fgets(author, 80, stdin);
+            printf("Введите год создания этой композиции: ");
+            fscanf(stdin, "%d\n", &years[i]);
+            
+            (*strstr(name,"\n"))=0;
+            (*strstr(author,"\n"))=0;
+            
+            names[i] = (char*)malloc(sizeof(char*) * (strlen(name)+1));
+            authors[i] = (char*)malloc(sizeof(char*) * (strlen(author)+1));
+            
+            strcpy(names[i], name);
+            strcpy(authors[i], author);
+        }
+        head = createMusicalCompositionList(names, authors, years, length);
     }
     
     
