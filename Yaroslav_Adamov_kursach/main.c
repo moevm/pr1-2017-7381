@@ -62,13 +62,23 @@ int main(){
     while (rabota){
         scanf("%d\n", &fun);
         switch(fun){
+                
             case 1:
-                printf("Количество композиций: %d\n", count(head));
+                if (head == NULL)
+                    printf("Список пуст.\n");
+                else
+                    printf("Количество композиций: %d\n", count(head));
                 break;
+                
             case 2:
-                printf("Названия композиций:\n");
-                print_names(head);
+                if (head == NULL)
+                    printf("Список пуст.\n");
+                else{
+                    printf("Названия композиций:\n");
+                    print_names(head);
+                }
                 break;
+                
             case 3:
                 printf("Чтобы добавить композицию, введите её название (до 80 символов): ");
                 fgets(name_for_push, 80, stdin);
@@ -81,22 +91,37 @@ int main(){
                 printf("Введите год создания композиции: ");
                 fscanf(stdin, "%d\n", &year_for_push);
                 MusicalComposition* element_for_push = createMusicalComposition(name_for_push, author_for_push, year_for_push);
-                push(head, element_for_push);
+                if (head == NULL)
+                    head = element_for_push;
+                else
+                    push(head, element_for_push);
                 break;
+                
             case 4:
-                printf("Чтобы удалить композицию, введите её название: ");
-                fgets(name_for_remove, 80, stdin);
-                (*strstr(name_for_remove,"\n"))=0;
-                removeEl(head, name_for_remove);
+                if (head == NULL)
+                    printf("Список пуст, нечего удалять.\n");
+                else{
+                    printf("Чтобы удалить композицию, введите её название: ");
+                    fgets(name_for_remove, 80, stdin);
+                    (*strstr(name_for_remove,"\n"))=0;
+                    removeEl(head, name_for_remove);
+                }
                 break;
+                
             case 5:
-                sort(head);
-                printf("Список отсортирован.\n");
+                if (head == NULL)
+                    printf("Список пуст, нечего сортировать.\n");
+                else{
+                    sort(head);
+                    printf("Список отсортирован.\n");
+                }
                 break;
+                
             case 6:
                 rabota = 0;
                 printf("Работа завершена.");
                 break;
+                
             default: printf("Для данной клавиши не придусмотренно никаких действий.\n");
         }
         if (rabota)
@@ -114,16 +139,20 @@ int main(){
     free(authors);
     free(years);
     
-    head = head->next;
-    while(head->next!=NULL){
-        free (head->prev->name);
-        free (head->prev->author);
-        free (head->prev);
-        head = head->next;
+    if (head!=NULL){ // если в списке нет элементов
+        if (head->next!=NULL){ // если в списке больше 1 элемента
+            head = head->next;
+            while(head->next!=NULL){
+                free (head->prev->name);
+                free (head->prev->author);
+                free (head->prev);
+                head = head->next;
+            }
+        }
+        free (head->name);
+        free (head->author);
+        free (head);
     }
-    free (head->name);
-    free (head->author);
-    free (head);
 
     return 0;
 }
