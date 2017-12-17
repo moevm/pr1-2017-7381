@@ -104,7 +104,7 @@ int main(){
                     printf("Чтобы удалить композицию, введите её название: ");
                     fgets(name_for_remove, 80, stdin);
                     (*strstr(name_for_remove,"\n"))=0;
-                    removeEl(head, name_for_remove);
+                    removeEl(&head, name_for_remove);
                 }
                 break;
                 
