@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stddef.h>
-#include "kursach.h"
+#include "main.h"
 
 
 int main()
@@ -114,10 +114,30 @@ int main()
 	free(name_for_push);
 	free(author_for_push);
 	free(name_for_remove);
-	free(head);
-	free(element_for_push);
 		
+	MusicalComposition* tmp = head->next;
 
+	while ( tmp -> next )	
+	{
+		tmp = tmp->next;
+		free(tmp); 
+	}
+	
+	free(element_for_push);
+	
+	free(head);
+	
     	return 0;
 
 }
+
+
+
+
+
+
+
+
+
+
+
