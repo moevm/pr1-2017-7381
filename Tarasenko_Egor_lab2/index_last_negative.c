@@ -12,7 +12,6 @@ int index_last_negative(int a[], int length)
                 {
                         neg = i;
 			return neg;
-			break;
                 }
         }
 }
