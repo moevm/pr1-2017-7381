@@ -141,11 +141,18 @@ void push(MusicalComposition* head, MusicalComposition* element){
 }
 void removeEl(MusicalComposition* head, char* name_for_remove){
 
-  for(;head != NULL; head = head->next)
+ for(;head != NULL; head = head->next)
     if (strcmp(head->name,name_for_remove) == 0){ 
+      if (head->next == NULL && head->prev == NULL) // case of only 1 element existing
+        free(head);
+      else if (head->next == NULL) // case of removing the last element
+        head->prev->next == NULL;
+      else if (head->prev == NULL) // case of removing the head
+        head->next->prev == NULL;      
+      else {                        // anything else 
     head->prev->next = head->next;
     head->next->prev = head->prev;
-    free(head);
+    }
     return;
     }
 }
