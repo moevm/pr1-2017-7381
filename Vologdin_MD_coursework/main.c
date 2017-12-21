@@ -6,11 +6,8 @@
 #include "year.h"
 int main(){
     printf("Number of songs=");
-   // getchar();
     int length;
     scanf("%d", &length);
-  //  if (length==0)
-  //      exit(0);
     char** names = (char**)malloc(sizeof(char*)*length);
     char** authors = (char**)malloc(sizeof(char*)*length);
     int* years = (int*)malloc(sizeof(int)*length);

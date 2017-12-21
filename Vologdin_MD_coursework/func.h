@@ -131,10 +131,6 @@ void print_names(MusicalComposition* head)
     while(current)
     {
         printf("%s\n",current->name);
-        printf("%s\n",current->author);
-        printf("%d\n",current->year);
-     //   printf("%p\n",current->prev);
-    //    printf("%p\n",current->next);
         current = current->next;
     }
     return;
