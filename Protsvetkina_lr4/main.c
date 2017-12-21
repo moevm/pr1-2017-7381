@@ -46,8 +46,8 @@ int main(){
         names[i] = (char*)malloc(sizeof(char*) * (strlen(name)+1));
         authors[i] = (char*)malloc(sizeof(char*) * (strlen(author)+1));
 
-        strncpy(names[i], name, 80);
-        strncpy(authors[i], author, 80);
+        strcpy(names[i], name);
+        strcpy(authors[i], author);
 
     }
     MusicalComposition* head = createMusicalCompositionList(names, authors, years, length);
@@ -94,15 +94,14 @@ int main(){
     free(years);
      
     for (; head != NULL; head = head->next){
-         free(head->name);
-         free(head->author);
-}
+         free(head->prev);
+         if (head->next == NULL)
+          free(head);
+      } 
     return 0;
 }
 
 MusicalComposition* createMusicalComposition(char* name, char* author,int year){
-    if (name == NULL || author == NULL)
-         return;
     MusicalComposition* Musical_Composition = (MusicalComposition*) malloc(sizeof(MusicalComposition));
     strncpy(Musical_Composition->name, name, 80);
     strncpy(Musical_Composition->author, author, 80);
@@ -115,14 +114,14 @@ MusicalComposition* createMusicalCompositionList(char** array_names, char** arra
     int i;
     MusicalComposition* current, *prev = NULL;
     MusicalComposition* head = NULL;
-    if (array_names == NULL || array_authors == NULL || array_years == NULL)
-         return;
+
   for(i = 0; i < n; i++){
     MusicalComposition* current = (MusicalComposition*) malloc(sizeof(MusicalComposition)); 
     if (head == NULL)
         head = current;
     else
         prev->next = current;
+
     current->next = NULL;
     strncpy(current->name, array_names[i], 80);
     strncpy(current->author, array_authors[i], 80);
@@ -133,33 +132,34 @@ MusicalComposition* createMusicalCompositionList(char** array_names, char** arra
   return head;  
 }
 void push(MusicalComposition* head, MusicalComposition* element){
-  if (head == NULL){
-       head = element;
-     break;
-}
-     for(;head->next != NULL; head = head->next); 
-  head->next = element;
+  if (head == NULL)
+    head = element;
+  else {
+    for(;head->next != NULL; head = head->next); 
+    head->next = element;
+    }
 }
 void removeEl(MusicalComposition* head, char* name_for_remove){
-    for(;strcmp(head->name,name_for_remove); head = head->next);
-    if (head->prev == NULL){
-          free(head->name);
-          free(head->author);
-          head = head->next;
-         break;
-    }
+
+  for(;head != NULL; head = head->next)
+    if (strcmp(head->name,name_for_remove) == 0){ 
     head->prev->next = head->next;
     head->next->prev = head->prev;
+    free(head);
+    return;
+    }
 }
 int count(MusicalComposition* head){
     int i; 
+
      if(head == NULL)
-          return 0;
+      return 0;
+
     for(i = 1; head->next != NULL; head = head->next)
          i++;
     return i;
 }
 void print_names(MusicalComposition* head){
-     for(; head != NULL && head->next != NULL; head = head->next);
+     for(; head != NULL; head = head->next)
          puts(head->name);
-     
+     }
