@@ -10,12 +10,10 @@ int main() {
          if (c=='\n' || c=='\t')
              continue;
          if (text_size%50==0 && text_size>0)
-             text = realloc(text, (text_size+50)*sizeof(char));
+             text = realloc(text, (text_size+51)*sizeof(char));
          text[text_size] = c;
          text_size++;
-    				   }
-    if (text_size%50==0)
-             text = realloc(text, (text_size+50)*sizeof(char));
+}
     text[text_size]='!';
     text_size++;
 
