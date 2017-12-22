@@ -4,12 +4,13 @@
 int check_word(char*word, int len) {
 	int i;
 	int l=0, r=len-1;
-	while (word[l] >= '0' && word[l] <= '9' && l < len) {
+	
+	while (isdigit(word[l])&& l < len) {
 		l++;
 	}
 	if (l >= len-1)
 		return 1;
-	while (word[r] >= '0' && word[r] <= '9' && r >= 0) {
+	while (isdigit(word[l]) && r >= 0) {
 		r--;
 	}
 	if (r <= 0)
@@ -23,6 +24,7 @@ int check_word(char*word, int len) {
 }
 
 int main() {
+    char check[17]="Dragon flew away!";
     int before=0;
 	char*str = (char*)malloc(100*sizeof(char));
 	char**text = NULL;
@@ -57,13 +59,20 @@ int main() {
 			for (i = 0; i < l; i++) {
 				text[line][linepos+i] = str[i];
 			}
+			
+			    
+			
 			linepos += l;
 		}
 		scanf("%c", str);
 		switch (str[0]) {
 		case '!':
+			if( strcmp(text[line], check) ==0){
 			end = 1;
 			break;
+			}
+			else
+			 continue;
 		case '\t':
 		case ' ':
 			if (linepos != 0) {
@@ -107,4 +116,5 @@ int main() {
     printf("Количество предложений до %i и количество предложений после %i\n",before,line);
 	return 0;
 }
+
 
