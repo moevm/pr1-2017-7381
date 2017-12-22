@@ -158,9 +158,10 @@ void print_srez_spiska( MusicalComposition* head , int start , int end )
                 temp = temp->next;
                 i++;
         }
-	free(temp);
 
-	if ( end > i || start > i )
+	printf("%d", i);
+
+	if ( end > i )
 	{	
 		printf("ошибка!");
 		return;	
@@ -170,7 +171,7 @@ void print_srez_spiska( MusicalComposition* head , int start , int end )
 		printf("название музыкальной композиции [%d]: %s " , i , tmp ->name );
 		printf("автор музыкальной композиции [%d]: %s " , i , tmp -> author );
 		printf("год создания музыкальной композиции [%d]: %d\n " , i ,tmp->year );
-
+	
 		tmp = tmp->next;	
 	}	
 }
