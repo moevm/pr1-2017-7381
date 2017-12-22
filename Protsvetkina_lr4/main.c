@@ -4,8 +4,8 @@
 
 
 typedef struct MusicalComposition {
-     char name[80];
-     char author[80];
+     char* name;
+     char* author;
      int year;
      struct MusicalComposition* next;
      struct MusicalComposition* prev;
@@ -103,8 +103,8 @@ int main(){
 
 MusicalComposition* createMusicalComposition(char* name, char* author,int year){
     MusicalComposition* Musical_Composition = (MusicalComposition*) malloc(sizeof(MusicalComposition));
-    strncpy(Musical_Composition->name, name, 80);
-    strncpy(Musical_Composition->author, author, 80);
+    Musical_Composition->name = name;
+    Musical_Composition->author = author;
     Musical_Composition->year = year;
     Musical_Composition->next = NULL;
     Musical_Composition->prev = NULL;
@@ -123,8 +123,8 @@ MusicalComposition* createMusicalCompositionList(char** array_names, char** arra
         prev->next = current;
 
     current->next = NULL;
-    strncpy(current->name, array_names[i], 80);
-    strncpy(current->author, array_authors[i], 80);
+    current->name = array_names[i];
+    current->author = array_authors[i];
     current->year = array_years[i];
     current->prev = prev;
     prev = current;
