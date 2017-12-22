@@ -143,18 +143,20 @@ void removeEl(MusicalComposition* head, char* name_for_remove){
 
  for(;head != NULL; head = head->next)
     if (strcmp(head->name,name_for_remove) == 0){ 
-      if (head->next == NULL && head->prev == NULL) // case of only 1 element existing
-      free(head);
+      if (head->next == NULL && head->prev == NULL) {// case of only 1 element existing
+      	free(head);
+		*head_p = NULL;
+	}
       else if (head->next == NULL) {// case of removing the last element
         head = head->prev;
         free(head->next);
         head->next = NULL;
       }
       else if (head->prev == NULL){ // case of removing the head
-        *head = *(head->next);
-        free(head->next->prev);
-        head->next->prev = head;
-        head->prev = NULL;
+        *head_p = head->next;
+        head = head->next;
+        free(head->prev);
+		head->prev = NULL;
         }  
       else {                        // anything else 
       head->prev->next = head->next;
