@@ -147,20 +147,25 @@ void print_names(MusicalComposition* head)
 void print_srez_spiska( MusicalComposition* head , int start , int end )
 {
 	MusicalComposition* tmp;
-	tmp = head->next;
+	tmp = head;
 	
-	if ( start == 0 )
-	{
-		printf("название музыкальной композиции [0]: %s "  , head ->name );
-                printf("автор музыкальной композиции [0]: %s "  , head -> author );
-                printf("год создания музыкальной композиции [0]: %d\n "  ,head->year );
-	}
-
 	int i=1;
-	for ( ; i < start ; i++ )
-		tmp = tmp->next;
-	
-	for ( ; i <= end ; i++ )
+
+        MusicalComposition* temp;
+        temp = head->next;
+        while (temp)
+        {
+                temp = temp->next;
+                i++;
+        }
+	free(temp);
+
+	if ( end > i || start > i )
+	{	
+		printf("ошибка!");
+		return;	
+	}
+	for ( int i=0 ; i <= end ; i++ )
 	{	
 		printf("название музыкальной композиции [%d]: %s " , i , tmp ->name );
 		printf("автор музыкальной композиции [%d]: %s " , i , tmp -> author );
