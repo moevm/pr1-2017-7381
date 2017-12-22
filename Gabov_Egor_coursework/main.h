@@ -166,7 +166,7 @@ void print_srez_spiska( MusicalComposition* head , int start , int end )
 		end = i-1;	
 	}
 	
-	for ( int k=0 ; k <= end ; k++ )
+	for ( int k = start ; k <= end ; k++ )
 	{	
 		printf("название музыкальной композиции [%d]: %s " , k , tmp ->name );
 		printf("автор музыкальной композиции [%d]: %s " , k , tmp -> author );
