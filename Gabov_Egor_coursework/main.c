@@ -115,11 +115,11 @@ int main()
 	free(author_for_push);
 	free(name_for_remove);
 		
-	for ( MusicalComposition* temp = head; temp -> next ; temp = temp->next )
+	for ( MusicalComposition* temp = head -> next ; temp -> next ; temp = temp->next )
 	{
-		free(temp->name);
-		free(temp->author);
-		free(temp);
+		free(temp->prev->name);
+		free(temp->prev->author);
+		free(temp->prev);
 	}		
 	
     	return 0;
