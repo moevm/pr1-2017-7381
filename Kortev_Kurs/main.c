@@ -212,6 +212,6 @@ for(h=0;h<n;h++)
   free(name_array);
   free(director_array);
   free(year_array);  
-  
+  free(tmp);
   
 }
