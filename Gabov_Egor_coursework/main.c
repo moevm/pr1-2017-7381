@@ -33,7 +33,7 @@ int main()
 		scanf("%d" , &years[i]);
 	}
 
-    	MusicalComposition* head = createMusicalCompositionList(names, authors, years, length);
+    	register MusicalComposition* head = createMusicalCompositionList(names, authors, years, length); // если length 0 то голова NULL
 	
 	int choice;
 	char* name_for_push = (char*)malloc(sizeof(char)*81);
@@ -67,7 +67,7 @@ int main()
 				scanf("%d", &year_for_push);
 
         			element_for_push = createMusicalComposition(name_for_push, author_for_push, year_for_push);
-				push( head , element_for_push );
+				push( head , element_for_push ); 
 				break;
 
 			case 1:
@@ -115,19 +115,12 @@ int main()
 	free(author_for_push);
 	free(name_for_remove);
 		
-	MusicalComposition* tmp = head; 
-
-	while ( tmp -> next )	
+	for ( MusicalComposition* temp = head; temp -> next ; temp = temp->next )
 	{
-		free(tmp->name);
-		free(tmp->author);
-		tmp = tmp->next;
-		free(tmp); 
-	}
-	
-	free(element_for_push);
-	
-	free(head);
+		free(temp->name);
+		free(temp->author);
+		free(temp);
+	}		
 	
     	return 0;
 

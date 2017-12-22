@@ -28,19 +28,24 @@ MusicalComposition* createMusicalComposition(char* name, char* author,int year)
 
         return element_for_push;
 }
-
+// добавление в нулевой
 void push(MusicalComposition* head, MusicalComposition* element)
 {
-        MusicalComposition* tmp;
-        if ( head->next == NULL )
+        if ( !head )               //
+	{
+		head = element;
+		return; 
+	}
+
+	if ( head->next == NULL )
         {
                 element->next = NULL;
                 element->prev = head;
                 head->next = element;
                 return;
         }
-
-        tmp = head->next;
+	
+        MusicalComposition* tmp = head->next;
 
         while (tmp->next)
         {
@@ -50,23 +55,25 @@ void push(MusicalComposition* head, MusicalComposition* element)
         element->next = NULL;
         element->prev = tmp;
         tmp->next = element;
-
+	
 }
 
 MusicalComposition* createMusicalCompositionList(char** array_names, char** array_authors, int* array_years,int length)
 {
         if ( length == 0 )
             return NULL;
-
+	
         MusicalComposition* head  = (MusicalComposition*)malloc(sizeof(MusicalComposition));
-
+	
         head->name = (char*)malloc(sizeof(char)*81);
         head->author = (char*)malloc(sizeof(char)*81);
-
+	
         strcpy(head->name , array_names[0]);
         strcpy(head->author , array_authors[0]);
         head->year = array_years[0];
-
+	head->next = NULL;
+	head->prev = NULL;
+	
         MusicalComposition* tmp;
 	
 	for ( int i = 1; i < length ; i++ )
@@ -80,9 +87,8 @@ MusicalComposition* createMusicalCompositionList(char** array_names, char** arra
 
 void removeEl(MusicalComposition* head, char* name_for_remove)
 {
-	MusicalComposition *tmp ;
-        tmp = head;
-	
+	MusicalComposition *tmp = head;
+
 	if ( strcmp ( head->name , name_for_remove ) == 0 )
 	{
 		*head = *head->next;
@@ -94,7 +100,9 @@ void removeEl(MusicalComposition* head, char* name_for_remove)
                 {
                         tmp->next->prev = tmp->prev;
                         tmp->prev->next = tmp->next;
-                        free(tmp);
+			free(tmp->author);
+			free(tmp->name);
+			free(tmp);
                 }
                 tmp = tmp->next;
         }
@@ -111,65 +119,60 @@ int count(MusicalComposition* head)
 {
         int i=1;
 
-        MusicalComposition* tmp;
-        tmp = head->next;
-        while (tmp)
+	if (!head)
+		return 0;
+
+	MusicalComposition* tmp = head;
+	while (tmp->next)
         {
                 tmp = tmp->next;
                 i++;
 
         }
-	free(tmp);
         return i;
+
 }
 
 void print_names(MusicalComposition* head)
 {
 	if ( !head )
 		return;
- 
-	MusicalComposition* tmp;
-        tmp = head->next;
-	printf( "%s\n" , head->name );
 	
-	if ( !tmp )
-         	return;
-	printf( "%s\n" , tmp->name );
-        
-	while (tmp->next)
-        {
-                if ( tmp->next->year != -1 )
-                        printf("%s\n"  , tmp->next->name );
-                tmp = tmp->next;
-        }
+	MusicalComposition* tmp = head;
+	
+	while( tmp )
+	{	
+		printf("%s\n" , tmp->name);
+		tmp = tmp->next;	
+	}
 }
 
 void print_srez_spiska( MusicalComposition* head , int start , int end )
 {
-	MusicalComposition* tmp;
-	tmp = head;
-	
-	int i=1;
 
-        MusicalComposition* temp;
-        temp = head->next;
-        while (temp)
+	MusicalComposition* tmp = head;
+	MusicalComposition* temp = NULL; 
+
+	if (head)
+		temp = head -> next ; 
+	
+	int count=0;
+	
+	while (temp)
         {
                 temp = temp->next;
-                i++;
+                count++;
         }
 
-	printf("%d", i);
-
-	if ( end > i )
+	if ( end > count )
 	{	
-		end = i-1;	
+		end = count ;	
 	}
 	
 	for ( int k = start ; k <= end ; k++ )
 	{	
-		printf("название музыкальной композиции [%d]: %s " , k , tmp ->name );
-		printf("автор музыкальной композиции [%d]: %s " , k , tmp -> author );
+		printf("название музыкальной композиции [%d]: %s \n " , k , tmp ->name );
+		printf("автор музыкальной композиции [%d]: %s \n" , k , tmp -> author );
 		printf("год создания музыкальной композиции [%d]: %d\n " , k ,tmp->year );
 			
 		tmp = tmp->next;	
