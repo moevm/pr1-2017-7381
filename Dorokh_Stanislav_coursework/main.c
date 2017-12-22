@@ -7,7 +7,8 @@
 int main(){
     int length;
     printf("Enter the number of compositions:\n");
-    scanf("%d\n", &length);  
+    scanf("%d", &length);
+    char m = getchar();  
 
     char** names = (char**)malloc(sizeof(char*)*length);
     char** authors = (char**)malloc(sizeof(char*)*length);
@@ -32,7 +33,8 @@ int main(){
             printf("Enter the name of author of the composition:\n");
             fgets(author, 80, stdin);
             printf("Enter release year:\n");
-            fscanf(stdin, "%d\n", &years[i]);
+            fscanf(stdin, "%d", &years[i]);
+            char n = getchar();
 
             (*strstr(name,"\n"))=0;
             (*strstr(author,"\n"))=0;
@@ -53,11 +55,21 @@ int main(){
 
     char name_for_remove[81];
 
+    printf("Options:\n");
+    printf("1 - adding new composition to the end of list.\n");
+    printf("2 - deleting element of list.\n");
+    printf("3 - deleting even elements of list.\n");
+    printf("4 - output the number of compositions.\n");
+    printf("5 - output the names of compositions.\n");
+    printf("6 - end of work with list.\n");
+    
+
     int opt = 0;
     int run = 1;
     while(run){
         printf("Enter the number of option:\n");
-        scanf("%d\n", &opt);
+        scanf("%d", &opt);
+        char t = getchar();
         switch(opt){
             case 1:
                 printf("Enter the name of comp:\n");
@@ -67,7 +79,8 @@ int main(){
                 fgets(author_for_push, 81, stdin);
                 (*strstr(author_for_push,"\n"))=0;
                 printf("Enter the release year:\n");
-                fscanf(stdin, "%d\n", &year_for_push);
+                fscanf(stdin, "%d", &year_for_push);
+                char k = getchar();
                 MusicalComposition* element_for_push = createMusicalComposition(name_for_push, author_for_push, year_for_push);
                 if(head == NULL)
                     head = element_for_push;
@@ -129,11 +142,20 @@ int main(){
 
     while(tmp != NULL)
         {
-            tmp=tmp->next;
+            
+            free(tmp->prev->name);
+            free(tmp->prev->author);
             free(tmp->prev);
+            tmp = tmp->next;
         }
-        free(tmp);
-        free(head);
+    if(tmp = NULL)
+        {
+            free(head->name);
+            free(head->author);
+            free(head);
+        }
+        
+    free(tmp);
     return 0;
 
 }

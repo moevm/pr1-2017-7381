@@ -65,9 +65,6 @@ void removeEl(MusicalComposition** head, char* name_for_remove){
                 }
                 break;
             }
-    free(tmp);
-    free(tmp->name);
-    free(tmp->author);
 
 }
 
