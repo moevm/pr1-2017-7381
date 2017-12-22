@@ -150,9 +150,6 @@ int main(){
     free(names);
     free(authors);
     free(years);
-    free(name_for_push);
-    free(author_for_push);
-    free(year_for_push);
 
     return 0;
 
