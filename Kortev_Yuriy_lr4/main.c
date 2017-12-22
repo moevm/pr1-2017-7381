@@ -54,9 +54,13 @@ MusicalComposition* createMusicalCompositionList(char** array_names, char** arra
 
 void push(MusicalComposition* head, MusicalComposition* element)
 {
-    
+	if(head==NULL)
+	{
+		head=element;
+	}
+
    MusicalComposition* tmp=head;
-   
+
     while(tmp->next)
     {
         tmp=tmp->next;
@@ -71,20 +75,44 @@ void removeEl(MusicalComposition* head, char* name_for_remove)
 {
     MusicalComposition* tmp = head;
     
-    while (tmp->next)
+    while (strcmp(tmp->name,name_for_remove)!=0)
+
     {
-        if(strcmp(tmp->name,name_for_remove)==0)
+	if(!tmp->next)
+		return;
+	tmp=tmp->next;
+    }
+        if(tmp->next!=NULL && tmp->back!=NULL)
         {
             tmp->next->back=tmp->back;
             tmp->back->next=tmp->next;
             tmp->next=NULL;
             tmp->back=NULL;
             free(tmp);
-     return;       
+            return;
         }
-        tmp=tmp->next;
-    }
+        if(tmp->back==NULL)
+	{
+		head=head->next;
+		head->back->next=NULL;
+		head->back=NULL;
+		free(tmp);
+		return;
+	}
+	if(tmp->next==NULL)
+	{
+		tmp->back->next=NULL;
+		tmp->back=NULL;
+		free(tmp);
+		return;
+	}
+	if(tmp->next==NULL && tmp->back==NULL)
+	{
+		free(tmp);
+		return;
+	}
 }
+
     
 
 
