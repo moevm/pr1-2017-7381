@@ -121,6 +121,11 @@ int main()
 		free(temp->prev->author);
 		free(temp->prev);
 	}		
+
+	free(head);
+	free(head->next);
+	free(head->prev);
+
 	
     	return 0;
 
