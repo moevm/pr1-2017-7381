@@ -155,10 +155,18 @@ int main(){
     free(authors);
     free(years);
 
-
-     for(int i=1; i<n; ++i){
-         free(newMC[i]);
+	
+	MusicalComposition* tmp ;
+     for(tmp = head; tmp->next != NULL ;){
+        tmp = tmp->next;
+	free(tmp->prev->name);
+	free(tmp->prev->author);
+	free(tmp->prev);
+ 	   
     }
+	free(tmp->name);
+	free(tmp->author);
+	free(tmp);
 
     return 0;
 
