@@ -62,11 +62,11 @@ void removeEl(MusicalComposition **head, char* name_for_remove){
                     comp->prev->next = comp->next;
                 }
             }
+            free (comp->name);
+            free (comp->author);
+            free (comp);
             break;
         }
-    free (comp->name);
-    free (comp->author);
-    free (comp);
 }
 
 // Возвращает количество композиций
@@ -85,24 +85,24 @@ void print_names(MusicalComposition* head){
 
 // сортировка списка по убыванию года
 void sort(MusicalComposition* head){
-    char *name_for_obmeb=(char*)malloc(81*sizeof(char));
-    char *author_for_obmeb=(char*)malloc(81*sizeof(char));
-    int year_for_obmen;
+    char *name_for_swap=(char*)malloc(81*sizeof(char));
+    char *author_for_swap=(char*)malloc(81*sizeof(char));
+    int year_for_swap;
     for (MusicalComposition* comp_1 = head; comp_1!=NULL; comp_1=comp_1->next){
         for (MusicalComposition* comp_2 = head; comp_2!=NULL; comp_2=comp_2->next){
             if (comp_1->year > comp_2->year){
-                strcpy (name_for_obmeb, comp_1->name);
-                strcpy (comp_1->name, comp_2->name);
-                strcpy (comp_2->name, name_for_obmeb);
-                strcpy (author_for_obmeb, comp_1->author);
-                strcpy (comp_1->author, comp_2->author);
-                strcpy (comp_2->author, author_for_obmeb);
-                year_for_obmen = comp_1->year;
+                strncpy (name_for_swap, comp_1->name, 80);
+                strncpy (comp_1->name, comp_2->name, 80);
+                strncpy (comp_2->name, name_for_swap, 80);
+                strncpy (author_for_swap, comp_1->author, 80);
+                strncpy (comp_1->author, comp_2->author, 80);
+                strncpy (comp_2->author, author_for_swap, 80);
+                year_for_swap = comp_1->year;
                 comp_1->year = comp_2->year;
-                comp_2->year = year_for_obmen;
+                comp_2->year = year_for_swap;
             }
         }
     }
-    free (name_for_obmeb);
-    free (author_for_obmeb);
+    free (name_for_swap);
+    free (author_for_swap);
 }
