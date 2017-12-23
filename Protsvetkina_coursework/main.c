@@ -17,13 +17,13 @@ MusicalComposition* createMusicalCompositionList(char** array_names, char** arra
 
 void push(MusicalComposition* head, MusicalComposition* element);
 
-void removeEl(MusicalComposition* head, char* name_for_remove);
+void removeEl(MusicalComposition** head_p, char* name_for_remove);
 
 int count(MusicalComposition* head);
 
 void print_names(MusicalComposition* head);
 
-void remove_div(MusicalComposition* head);
+void remove_div(MusicalComposition** head_p);
 
 int main(){
   int length;
@@ -36,7 +36,7 @@ int main(){
     char name[80];
     char author[80];
     MusicalComposition* head = NULL;
-
+	MusicalComposition** main_head = NULL;
     printf("Input the number of elements the List will consist of\n");
     scanf("%d", &length);
 
@@ -71,6 +71,7 @@ int main(){
 
     head = createMusicalCompositionList(names, authors, years, length);
 }
+	main_head = &head;
     int choice, exit_flag = 0;
 
     do {
@@ -122,12 +123,12 @@ int main(){
           printf("Input the title of the composition to remove it:\n");
           fgets(name_for_remove, 80, stdin);
           (*strstr(name_for_remove, "\n")) = 0;
-          removeEl(head, name_for_remove);
+          removeEl(main_head, name_for_remove);
           break;
 
       case 5:
 
-          remove_div(head);
+          remove_div(main_head);
           break;
 
       case 9:
@@ -199,22 +200,24 @@ void push(MusicalComposition* head, MusicalComposition* element){
     }
 }
 
-void removeEl(MusicalComposition* head, char* name_for_remove){
-
+void removeEl(MusicalComposition** head_p, char* name_for_remove){
+  MusicalComposition *head = * head_p;
   for(;head != NULL; head = head->next)
     if (strcmp(head->name,name_for_remove) == 0){ 
-      if (head->next == NULL && head->prev == NULL) // case of only 1 element existing
-      free(head);
+      if (head->next == NULL && head->prev == NULL) {// case of only 1 element existing
+      	free(head);
+		*head_p = NULL;
+	}
       else if (head->next == NULL) {// case of removing the last element
         head = head->prev;
         free(head->next);
         head->next = NULL;
       }
       else if (head->prev == NULL){ // case of removing the head
-        *head = *(head->next);
-        free(head->next->prev);
-        head->next->prev = head;
-        head->prev = NULL;
+        *head_p = head->next;
+        head = head->next;
+        free(head->prev);
+		head->prev = NULL;
         }  
       else {                        // anything else 
       head->prev->next = head->next;
@@ -237,26 +240,31 @@ int count(MusicalComposition* head){
 }
 
 void print_names(MusicalComposition* head){
+	if (head == NULL)
+		printf("Nothing to print! Your list is empty.\n");
      for(; head != NULL; head = head->next)
          puts(head->name);
 }
 
-void remove_div(MusicalComposition* head){
+void remove_div(MusicalComposition** head_p){
  
-    for(;head != NULL; head = head->next)
+   MusicalComposition *head = * head_p;
+  for(;head != NULL; head = head->next)
     if (head->year % 4 == 0){ 
-      if (head->next == NULL && head->prev == NULL) // case of only 1 element existing
-      free(head);
+      if (head->next == NULL && head->prev == NULL) {// case of only 1 element existing
+      	free(head);
+		*head_p = NULL;
+	}
       else if (head->next == NULL) {// case of removing the last element
         head = head->prev;
         free(head->next);
         head->next = NULL;
       }
       else if (head->prev == NULL){ // case of removing the head
-        *head = *(head->next);
-        free(head->next->prev);
-        head->next->prev = head;
-        head->prev = NULL;
+        *head_p = head->next;
+        head = head->next;
+        free(head->prev);
+		head->prev = NULL;
         }  
       else {                        // anything else 
       head->prev->next = head->next;
