@@ -10,7 +10,8 @@ int main(){
     
     int length;
     printf("Создание списка композиций.\nВведите количество композиций: ");
-    scanf("%d\n", &length);
+    char c;
+    scanf("%d%c", &length, &c);
 
     char** names = (char**)malloc(sizeof(char*)*length);
     char** authors = (char**)malloc(sizeof(char*)*length);
@@ -29,7 +30,7 @@ int main(){
             printf("Введите автора этой композиции (до 80 символов): ");
             fgets(author, 80, stdin);
             printf("Введите год создания этой композиции: ");
-            fscanf(stdin, "%d\n", &years[i]);
+            fscanf(stdin, "%d%c", &years[i], &c);
             
             (*strstr(name,"\n"))=0;
             (*strstr(author,"\n"))=0;
@@ -60,7 +61,7 @@ int main(){
     printf("5 - отсортировать список по году (по убыванию).\n");
     printf("6 - завершить работу программы.\n");
     while (rabota){
-        scanf("%d\n", &fun);
+        scanf("%d%c", &fun, &c);
         switch(fun){
                 
             case 1:
@@ -89,7 +90,7 @@ int main(){
                 (*strstr(author_for_push,"\n"))=0;
                 
                 printf("Введите год создания композиции: ");
-                fscanf(stdin, "%d\n", &year_for_push);
+                fscanf(stdin, "%d%c", &year_for_push, &c);
                 MusicalComposition* element_for_push = createMusicalComposition(name_for_push, author_for_push, year_for_push);
                 if (head == NULL)
                     head = element_for_push;
