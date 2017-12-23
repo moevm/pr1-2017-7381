@@ -15,8 +15,12 @@ MusicalComposition* createMusicalComposition(char* name, char* author, int year)
 {
 
     MusicalComposition* music = (MusicalComposition*)malloc(sizeof(MusicalComposition));
-    music->name = name;
-    music->author = author;
+    music->name=(char*)malloc(sizeof(name));
+    strcopy(music->name, name);
+	
+	
+    music->author=(char*)malloc(sizeof(author));
+    strcopy(music->author, author);
     music->year = year;
     music->next = NULL;
     music->previous = NULL;
@@ -64,14 +68,14 @@ void removeEl(MusicalComposition** head, char* name_for_remove)
     while(current)
     {
         if(strcmp(current->name, name_for_remove) == 0)
-        {	//óäàëåíèå ýëåìåíòà áåç neõt è previous
+        {	//Ã³Ã¤Ã Ã«Ã¥Ã­Ã¨Ã¥ Ã½Ã«Ã¥Ã¬Ã¥Ã­Ã²Ã  Ã¡Ã¥Ã§ neÃµt Ã¨ previous
 	    if(current->next == NULL && current->previous == NULL){
                  free(*head);
                  *head=NULL;
 		 head=NULL;
                  return;
             }
-			//óäàëåíèå ýëåìåíòà ñ neõt è previous
+			//Ã³Ã¤Ã Ã«Ã¥Ã­Ã¨Ã¥ Ã½Ã«Ã¥Ã¬Ã¥Ã­Ã²Ã  Ã± neÃµt Ã¨ previous
             if(current->next != NULL && current->previous != NULL)
             {
             	pointer=current;
@@ -82,7 +86,7 @@ void removeEl(MusicalComposition** head, char* name_for_remove)
                 pointer=NULL;
                 continue;
             }
-            //óäàëåíèå ýëåìåíòà áåç neõt
+            //Ã³Ã¤Ã Ã«Ã¥Ã­Ã¨Ã¥ Ã½Ã«Ã¥Ã¬Ã¥Ã­Ã²Ã  Ã¡Ã¥Ã§ neÃµt
 	    if(current->next == NULL)
             {
                 current->previous->next = NULL;
@@ -90,7 +94,7 @@ void removeEl(MusicalComposition** head, char* name_for_remove)
                 current=NULL;
                 return;
             }
-            //óäàëåíèå ýëåìåíòà áåç previous
+            //Ã³Ã¤Ã Ã«Ã¥Ã­Ã¨Ã¥ Ã½Ã«Ã¥Ã¬Ã¥Ã­Ã²Ã  Ã¡Ã¥Ã§ previous
 	    else if(current->previous == NULL)
             {
             	pointer=current;
@@ -131,13 +135,15 @@ void print_names(MusicalComposition* head)
 }
 void delete_list(MusicalComposition** head)
 {
-    while((*head)->next)
-    {   
-		(*head)=(*head)->next;
-        free((*head)->previous);
-        
-    }
-    free(*head);
-    *head=NULL;
-    head=NULL;
+ if(*head!=NULL){
+ +		while((*head)->next)
+ +		{
+ +			(*head)=(*head)->next;
+ +			free(*head)->previous);
+ +			(*head)->previous=NULL;
+ +		}
+ +		if(*head!=NULL)
+ +		free(*head);
+ +		*head=NULL;
+ +	}
 }
