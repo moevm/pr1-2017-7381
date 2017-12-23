@@ -85,18 +85,18 @@ void print_names(MusicalComposition* head){
 
 // сортировка списка по убыванию года
 void sort(MusicalComposition* head){
-    char *name_for_swap=(char*)malloc(81*sizeof(char));
-    char *author_for_swap=(char*)malloc(81*sizeof(char));
+    char *name_for_swap;
+    char *author_for_swap;
     int year_for_swap;
     for (MusicalComposition* comp_1 = head; comp_1!=NULL; comp_1=comp_1->next){
         for (MusicalComposition* comp_2 = head; comp_2!=NULL; comp_2=comp_2->next){
             if (comp_1->year > comp_2->year){
-                strncpy (name_for_swap, comp_1->name, 80);
-                strncpy (comp_1->name, comp_2->name, 80);
-                strncpy (comp_2->name, name_for_swap, 80);
-                strncpy (author_for_swap, comp_1->author, 80);
-                strncpy (comp_1->author, comp_2->author, 80);
-                strncpy (comp_2->author, author_for_swap, 80);
+                name_for_swap = comp_1->name;
+                comp_1->name = comp_2->name;
+                comp_2->name = name_for_swap;
+                author_for_swap = comp_1->author;
+                comp_1->author = comp_2->author;
+                comp_2->author = author_for_swap;
                 year_for_swap = comp_1->year;
                 comp_1->year = comp_2->year;
                 comp_2->year = year_for_swap;
