@@ -15,12 +15,12 @@ MusicalComposition* createMusicalComposition(char* name, char* author, int year)
 {
 
     MusicalComposition* music = (MusicalComposition*)malloc(sizeof(MusicalComposition));
-    music->name=(char*)malloc(sizeof(name));
-    strcpy(music->name, name);
+    music->name=(char*)malloc(sizeof(char)*strlen(name));
+    strncpy(music->name, name, 80);
 	
 	
-    music->author=(char*)malloc(sizeof(author));
-    strcpy(music->author, author);
+    music->author=(char*)malloc(sizeof(char)*strlen(author));
+    strncpy(music->author, author, 80);
     music->year = year;
     music->next = NULL;
     music->previous = NULL;
@@ -139,6 +139,8 @@ void delete_list(MusicalComposition** head)
  		while((*head)->next)
  		{
  			(*head)=(*head)->next;
+			free((*head)->previous->name);
+			free((*head)->previous->author);
  			free((*head)->previous);
  			(*head)->previous=NULL;
  		}
