@@ -103,6 +103,4 @@ void sort(MusicalComposition* head){
             }
         }
     }
-    free (name_for_swap);
-    free (author_for_swap);
 }
