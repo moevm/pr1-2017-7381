@@ -11,7 +11,6 @@ int main(){
     int length;
     printf("Создание списка композиций.\nВведите количество композиций: ");
     scanf("%d\n", &length);
-    getchar();
 
     char** names = (char**)malloc(sizeof(char*)*length);
     char** authors = (char**)malloc(sizeof(char*)*length);
