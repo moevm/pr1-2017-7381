@@ -1,7 +1,6 @@
-
+#include <string.h> 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h> 
 
 
 // Описание структуры MusicalComposition
@@ -189,6 +188,7 @@ MusicalComposition* removeEl(MusicalComposition* head, char* name_for_remove){//
     }
     if(equal==1){
         if(head->next==NULL&&head->prev==NULL){
+            free(head);
             return NULL;
         }
         if(head->prev==NULL){
@@ -408,6 +408,7 @@ int main(){
     return 0;
 
 }
+
 
 
 
