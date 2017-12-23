@@ -43,6 +43,11 @@ int main(){
 	}
 	MusicalComposition* head = createMusicalCompositionList(names, authors, years, length);
 	
+	for (int i=0;i<length;i++){
+        free(names[i]);
+        free(authors[i]);
+        }
+    
 	if(names!=NULL)
 	free(names);
 	if(authors!=NULL)
@@ -63,8 +68,8 @@ int main(){
 	printf("6 - завершить работу программы.\n");
 	int k=0;
 	getchar();
-	char *name_for_push=NULL;
-	char *author_for_push=NULL;
+	char name_for_push[80];
+	char author_for_push[80];
 	int year_for_push;
 	while(what_you_want!=6)
 	{       
@@ -78,8 +83,8 @@ int main(){
 		switch(what_you_want)
 		{
 		case 1: 
-			author_for_push = (char*)malloc(sizeof(char*) * 80);
-			name_for_push = (char*)malloc(sizeof(char*) * 80);
+			//author_for_push = (char*)malloc(sizeof(char*) * 80);
+			//name_for_push = (char*)malloc(sizeof(char*) * 80);
 		        printf("Введите название композиции (не больше 80 символов):");
 			getchar();
         	        fgets(name_for_push, 80, stdin);
@@ -115,7 +120,7 @@ int main(){
 		break;
 		}
 	}
-	if(head!=NULL){
+	/*if(head!=NULL){
 		while(head->next)
 		{
 			head=head->next;
@@ -125,7 +130,8 @@ int main(){
 		if(head!=NULL)
 		free(head);
 		head=NULL;
-	}		
+	}*/
+	delete_list(&head);
 return 0;
 
 }
