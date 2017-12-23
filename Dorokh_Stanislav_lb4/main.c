@@ -41,16 +41,20 @@ MusicalComposition* createMusicalCompositionList(char** array_names, char** arra
     return head;
 }
 
-void push(MusicalComposition* head, MusicalComposition* element){
+void push(MusicalComposition** head, MusicalComposition* element_for_push){
     
+        MusicalComposition* tmp = *head;
+        if(!tmp){
+        *head=element_for_push; //Если список пуст
+        return;
+        }
+        while(tmp->next) tmp = tmp->next;
+        element_for_push->next = NULL;
+        element_for_push->prev = tmp;
+        tmp->next = element_for_push;
     
-    MusicalComposition* tmp = head;
-    
-    while(tmp->next != NULL)
-        tmp=tmp->next;
-  
-    tmp->next = element;
-    element->prev = tmp;
+
+
 }
 
 void removeEl(MusicalComposition* head, char* name_for_remove){
@@ -132,7 +136,7 @@ int main(){
     int k = count(head);
 
     printf("%d\n", k);
-    push(head, element_for_push);
+    push(&head, element_for_push);
 
     k = count(head);
     printf("%d\n", k);
@@ -150,6 +154,11 @@ int main(){
     free(names);
     free(authors);
     free(years);
+
+
+     for(int i=1; i<n; ++i){
+         free(newMC[i]);
+    }
 
     return 0;
 
