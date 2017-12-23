@@ -16,11 +16,11 @@ MusicalComposition* createMusicalComposition(char* name, char* author, int year)
 
     MusicalComposition* music = (MusicalComposition*)malloc(sizeof(MusicalComposition));
     music->name=(char*)malloc(sizeof(name));
-    strcopy(music->name, name);
+    strcpy(music->name, name);
 	
 	
     music->author=(char*)malloc(sizeof(author));
-    strcopy(music->author, author);
+    strcpy(music->author, author);
     music->year = year;
     music->next = NULL;
     music->previous = NULL;
