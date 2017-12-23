@@ -15,7 +15,7 @@ MusicalComposition* createMusicalComposition(char* name, char* author,int year);
 
 MusicalComposition* createMusicalCompositionList(char** array_names, char** array_authors, int* array_years, int n);
 
-void push(MusicalComposition* head, MusicalComposition* element);
+void push(MusicalComposition** head_p, MusicalComposition* element);
 
 void removeEl(MusicalComposition** head_p, char* name_for_remove);
 
@@ -115,7 +115,7 @@ int main(){
           (*strstr(author_for_push, "\n")) = 0;
 
           MusicalComposition* element_for_push = createMusicalComposition(name_for_push, author_for_push, year_for_push);
-          push(head, element_for_push);
+          push(main_head, element_for_push);
           break;
       
       case 4:
@@ -191,9 +191,10 @@ MusicalComposition* createMusicalCompositionList(char** array_names, char** arra
   return head;  
 }
 
-void push(MusicalComposition* head, MusicalComposition* element){
+void push(MusicalComposition** head_p, MusicalComposition* element){
+  MusicalComposition *head = * head_p;
   if (head == NULL)
-    head = element;
+    *head_p = element;
   else {
     for(;head->next != NULL; head = head->next); 
     head->next = element;
