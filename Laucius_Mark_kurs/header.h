@@ -136,14 +136,14 @@ void print_names(MusicalComposition* head)
 void delete_list(MusicalComposition** head)
 {
  if(*head!=NULL){
- +		while((*head)->next)
- +		{
- +			(*head)=(*head)->next;
- +			free(*head)->previous);
- +			(*head)->previous=NULL;
- +		}
- +		if(*head!=NULL)
- +		free(*head);
- +		*head=NULL;
- +	}
+ 		while((*head)->next)
+ 		{
+ 			(*head)=(*head)->next;
+ 			free(*head)->previous);
+ 			(*head)->previous=NULL;
+ 		}
+ 		if(*head!=NULL)
+ 		free(*head);
+ 		*head=NULL;
+ 	}
 }
