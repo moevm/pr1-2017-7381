@@ -20,7 +20,7 @@ int main(){
     if(length == 0){
         head == NULL;
         printf("List is empty!\n");
-        exit(0);
+        
     }
     else{
 
@@ -46,8 +46,10 @@ int main(){
             strcpy(authors[i], author);
 
         }
+        head = createMusicalCompositionList(names, authors, years, length);
     }
-    head = createMusicalCompositionList(names, authors, years, length);
+    
+    
     
     char name_for_push[81];
     char author_for_push[81];
@@ -63,7 +65,7 @@ int main(){
     printf("5 - output the names of compositions.\n");
     printf("6 - end of work with list.\n");
     
-
+    
     int opt = 0;
     int run = 1;
     while(run){
@@ -103,6 +105,7 @@ int main(){
                 else{
                     printf("Deleting even composition...\n");
                     deleting(head);
+                    printf("The rest of composition:\n");
                     print_names(head);
                 }
                 break;
@@ -138,24 +141,20 @@ int main(){
     free(authors);
     free(years);
 
-    MusicalComposition* tmp = head->next;
-
-    while(tmp != NULL)
-        {
+    MusicalComposition* tmp;
+    if(head !=NULL){
+        for(tmp=head; tmp->next != NULL;)
+            {
+                tmp = tmp->next;
+                free(tmp->prev->name);
+                free(tmp->prev->author);
+                free(tmp->prev);
             
-            free(tmp->prev->name);
-            free(tmp->prev->author);
-            free(tmp->prev);
-            tmp = tmp->next;
-        }
-    if(tmp = NULL)
-        {
-            free(head->name);
-            free(head->author);
-            free(head);
-        }
-        
+            } 
+    free(tmp->name);
+    free(tmp->author);
     free(tmp);
+        }
     return 0;
 
 }
