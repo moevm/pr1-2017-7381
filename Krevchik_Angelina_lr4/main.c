@@ -22,7 +22,7 @@ MusicalComposition* createMusicalComposition(char* name, char* author,int year)
      Musical_Composition->year=year;
      Musical_Composition->prev=NULL;
      Musical_Composition->next=NULL;
- return Musical_Composition;
+     return Musical_Composition;
 }
 
 // Функции для работы со списком MusicalComposition
@@ -42,11 +42,10 @@ if (i!=0)
         
 
 else
-
-    head=tmp;
-
-         pred=tmp;
-}
+	head=tmp;
+   
+pred=tmp;
+  }
     return head;
 }
 
@@ -84,10 +83,7 @@ for (;head!=NULL;head=head->next)
    {head->next->prev=head->prev;
         head->prev->next=head->next;
         free (head);
-     }
-    
-        
-       
+     }       
 }
 
 int count(MusicalComposition* head)
