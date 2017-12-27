@@ -71,7 +71,7 @@ void push(MusicalComposition* head, MusicalComposition* element)
 }
 
 
-void removeEl(MusicalComposition* head, char* name_for_remove)
+void removeEl(MusicalComposition** head, char* name_for_remove)
 {
     MusicalComposition* tmp = head;
     
@@ -93,9 +93,11 @@ void removeEl(MusicalComposition* head, char* name_for_remove)
         }
         if(tmp->back==NULL)
 	{
-		head=head->next;
-		head->back->next=NULL;
-		head->back=NULL;
+		tmp=tmp->next;
+		*head=tmp;
+		tmp=tmp->back;
+		tmp->next->back=NULL;
+		tmp->next=NULL;
 		free(tmp);
 		return;
 	}
@@ -195,7 +197,7 @@ int main(){
     k = count(head);
     printf("%d\n", k);
 
-    removeEl(head, name_for_remove); 
+    removeEl(&head, name_for_remove); 
     print_names(head);
 
     k = count(head);
