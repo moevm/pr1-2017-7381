@@ -84,7 +84,7 @@ void print_names(MusicalComposition* head){
 }
 
 // сортировка списка по убыванию года
-void sort(MusicalComposition* head){
+void sort(MusicalComposition** head){
     MusicalComposition *mc1, *mc2, *comp_1, *comp_2;
     for (comp_1 = *head; comp_1->next!=NULL; comp_1=comp_1->next){
         for (comp_2 = comp_1->next; comp_2!=NULL; comp_2=comp_2->next){
