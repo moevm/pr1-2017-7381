@@ -2,148 +2,15 @@
 #include <string.h>
 #include <stddef.h>
 #include <stdio.h>
+#include "fnctns.h"
+#include "sort.h"
  
-
 #define LEN 80
-typedef struct Film
-{
-  int year;
-  char* name;
-  char* director;
-  struct Film* next;
-  struct Film* back;
-}Film;
-
-Film* makeFilm(char* name,char* director,int year);
-Film* makeFilm(char* name,char* director,int year)
-{
-  Film* make=(Film*)malloc(sizeof(Film));
-    make->name = name;
-    make->director = director;
-    make->year = year;
-    make->next = NULL;
-    make->back = NULL;
-    return make;
-  
-}
-Film* makeFilmList(char** array_name,char** array_director,int* array_year,int n);
-Film* makeFilmList(char** array_name,char** array_director,int* array_year,int n)
-{
-  Film* head = makeFilm(array_name[0], array_director[0], array_year[0]);
-    Film* tmp;
-    Film* prev=head;
-    int i;
-    for(i = 1; i < n; i++)
-    {
-        tmp = makeFilm(array_name[i], array_director[i], array_year[i]);
-        tmp->back = prev;
-        prev->next = tmp;
-        prev = tmp;
-    }
-    return head;
-}
 
 
-void sort(Film* head,int n);
-void sort(Film* head,int n)
-{
-  Film* half1;
-   Film* half2;
-  Film* tmp=head;
-  int i=0;
-  int j,c;
-  for(i=0;i<n/2;i++)
-  {
-    tmp=tmp->next;
-  }
 
 
-    half1=tmp->back;//убыване
-  half2=tmp;//возросане
-  half2->back->next=NULL;
-  half2->back=NULL;
-   //возросане
-  Film* a;
-  Film* b;
-  int year;
-  char name[LEN];
-  char director[LEN];
-  int flag = 1;
-  
-  if(!half2)
-  return;
-  
-  while(flag)
-  {
-    b=half2;
-    a=half2->next;
-    flag=0;
-    
-    while(a)
-    {
-      if((b->year)>(a->year))
-      {
-        strcpy(name, b->name);
-        strcpy(b->name, a->name);
-        strcpy(a->name, name);
-        
-        strcpy(director, b->director);
-        strcpy(b->director, a->director);
-        strcpy(a->director, b->director);
-        
-        year=b->year;
-        b->year=a->year;
-        a->year=year;
-        
-        flag=1;
-      }
-      b=b->next;
-      a=a->next;
-    }
-  }
 
-
-  
-  
-  
-  //убыване
-  flag=1;
-  
-while(flag)
-  {
-    b=half1;
-    a=half1->back;
-    flag=0;
-    
-    while(a)
-    {
-      if((b->year)>(a->year))
-      {
-        strcpy(name, b->name);
-        strcpy(b->name, a->name);
-        strcpy(a->name, name);
-        
-        strcpy(director, b->director);
-        strcpy(b->director, a->director);
-        strcpy(a->director, b->director);
-        
-        year=b->year;
-        b->year=a->year;
-        a->year=year;
-        
-        flag=1;
-      }
-      b=b->back;
-      a=a->back;
-    }
-  }
-
-  //соединение
-  half1->next=half2;
-  half2->back=half1;
-
-
-}
 
 
 
@@ -166,15 +33,17 @@ for(i=0;i<n;i++){
       printf("struct: %d\n", i+1);
     char name[80];
     char director[80];
-    char musor[80];
+    char cleaner[10];
     
    
     printf("name: ");
     fgets(name,80,stdin);
     printf("director: ");
     fgets(director,80,stdin);
+	printf("Год выпуска: ");
     fscanf(stdin, "%d\n",&year_array[i]);
-    fgets(musor,80,stdin);
+	fgets(cleaner,10,stdin);
+   
   
 (*strstr(name,"\n"))=0;
 (*strstr(director,"\n"))=0;
@@ -186,32 +55,86 @@ for(i=0;i<n;i++){
     strcpy(director_array[i],director);
       
   }
-  Film* tmp=makeFilmList(name_array,director_array,year_array, n);
-  sort(tmp,n);
-
-int h;
-for(h=0;h<n;h++)
-{
-  printf("%s %s %d\n", tmp->name, tmp->director, tmp->year);
-    tmp=tmp->next;
+  Film* head=makeFilmList(name_array,director_array,year_array, n);
+  
+  
+  char cleaner[10];  
+  int choose=0;
+  char clean_buf;
+  char name_for_push[LEN];
+  char director_for_push[LEN];
+  int year_for_push;
+  char name_for_rem[LEN]; 
+  printf("1 - добавить фильм в список\n");
+  printf("2 - удалить фильм из списка\n");
+  printf("3 - вывести кол-во фильмов в списке\n");
+  printf("4 - вывести названия фильмов\n");
+  printf("5 - отсортировать 1-ую половину списка по убыванию, 2-ую по возростанию\n");
+  printf("6 - закончить программу\n");
+  
+  while(choose!=6)
+ {
+	  scanf("%d%c",&choose,&clean_buf);
+	  
+				if(choose<1 || choose>6)
+				{
+					printf("введите корректную задачу\n");
+					continue;
+				}
+		switch(choose)
+		{
+			case 1:
+					
+					
+					printf("Введите названия фильма\n");
+					fgets(name_for_push, 80, stdin);
+					printf("Введите имя режиссера\n");
+					fgets(director_for_push, 80, stdin);
+					printf("Ввеите год выпуска\n");
+					fscanf(stdin, "%d\n", &year_for_push);
+					fgets(cleaner,10,stdin);
+					(*strstr(name_for_push,"\n"))=0;
+					(*strstr(director_for_push,"\n"))=0;
+					Film* element_for_push=makeFilm(name_for_push,director_for_push,year_for_push);
+					n=push(head,element_for_push,n);
+					break;
+			case 2:
+					
+					fgets(cleaner,10,stdin);
+					printf("Какой фильм удалить?\n");
+					fgets(name_for_rem,80,stdin);
+					(*strstr(name_for_rem,"\n"))=0;
+					n=removeEl(&head,name_for_rem,n);
+					break;
+			case 3:
+					printf("%d",count(head));
+					break;
+			case 4:
+					print_names(head);
+					break;
+			case 5:
+					sort(head, n);
+					break;
+		}
+			
+					
 }
-
-  while(tmp)
-  {
-    free(tmp->name);
-    free(tmp->director);
-    tmp=tmp->next;
-    free(tmp->back->next);
-    free(tmp->back);
-  }
-  for(i=0;i<n;i++)
-  {
-    free(name_array[i]);
-    free(director_array[i]);
-  }
-  free(name_array);
-  free(director_array);
-  free(year_array);  
-  free(tmp);
+Film* tmp=head;
+while(tmp->next!=NULL)
+{
+	tmp=tmp->next;
+	tmp->back->next=NULL;
+	tmp->back=NULL;
+}	
+free(tmp);
+free(head);
+for(i=0;i<n;i++)
+{
+	free(name_array[i]);
+	free(director_array[i]);
+}
+free(name_array);
+free(director_array);
+free(year_array);
   
 }
