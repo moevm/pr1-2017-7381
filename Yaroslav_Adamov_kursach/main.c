@@ -113,7 +113,7 @@ int main(){
                 if (head == NULL)
                     printf("Список пуст, нечего сортировать.\n");
                 else{
-                    sort(head);
+                    sort(&head);
                     printf("Список отсортирован.\n");
                 }
                 break;
