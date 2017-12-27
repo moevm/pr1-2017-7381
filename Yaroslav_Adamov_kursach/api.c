@@ -85,21 +85,42 @@ void print_names(MusicalComposition* head){
 
 // сортировка списка по убыванию года
 void sort(MusicalComposition* head){
-    char *name_for_swap;
-    char *author_for_swap;
-    int year_for_swap;
-    for (MusicalComposition* comp_1 = head; comp_1!=NULL; comp_1=comp_1->next){
-        for (MusicalComposition* comp_2 = head; comp_2!=NULL; comp_2=comp_2->next){
-            if (comp_1->year > comp_2->year){
-                name_for_swap = comp_1->name;
-                comp_1->name = comp_2->name;
-                comp_2->name = name_for_swap;
-                author_for_swap = comp_1->author;
-                comp_1->author = comp_2->author;
-                comp_2->author = author_for_swap;
-                year_for_swap = comp_1->year;
-                comp_1->year = comp_2->year;
-                comp_2->year = year_for_swap;
+    MusicalComposition *mc1, *mc2, *comp_1, *comp_2;
+    for (comp_1 = *head; comp_1->next!=NULL; comp_1=comp_1->next){
+        for (comp_2 = comp_1->next; comp_2!=NULL; comp_2=comp_2->next){
+            
+            if (comp_1->year < comp_2->year){
+                if (comp_1->next==comp_2){ // элементы идут друг за другом
+                    mc1 = comp_1->prev;
+                    comp_1->prev = comp_2;
+                    comp_1->next=comp_2->next;
+                    if (comp_1->next!=NULL)
+                        comp_1->next->prev = comp_1;
+                    comp_2->next = comp_1;
+                    comp_2->prev = mc1;
+                    if (comp_2->prev!=NULL)
+                        comp_2->prev->next = comp_2;
+                } else { // элменты не идут друг за другом
+                    mc1 = comp_1->next;
+                    mc2 = comp_1->prev;
+                    comp_1->next = comp_2->next;
+                    comp_1->prev = comp_2->prev;
+                    comp_1->prev->next = comp_1;
+                    if (comp_1->next!=NULL)
+                        comp_1->next->prev = comp_1;
+                    comp_2->next = mc1;
+                    comp_2->prev = mc2;
+                    comp_2->next->prev = comp_2;
+                    if (comp_2->prev!=NULL)
+                        comp_2->prev->next = comp_2;
+                }
+                
+                mc1=comp_1;
+                if (*head == comp_1)
+                    *head = comp_2;
+                comp_1=comp_2;
+                comp_2=mc1;
+                
             }
         }
     }
