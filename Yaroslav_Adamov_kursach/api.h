@@ -14,4 +14,4 @@ void push(MusicalComposition*, MusicalComposition*);
 void removeEl(MusicalComposition**, char*);
 int count(MusicalComposition*);
 void print_names(MusicalComposition*);
-void sort(MusicalComposition*);
+void sort(MusicalComposition**);
