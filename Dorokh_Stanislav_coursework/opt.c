@@ -65,7 +65,9 @@ void removeEl(MusicalComposition** head, char* name_for_remove){
                 }
                 break;
             }
-
+            free(tmp->name);
+            free(tmp->author);
+            free(tmp);
 }
 
 int count(MusicalComposition* head){
