@@ -28,10 +28,8 @@ void remove_div(MusicalComposition** head_p);
 int main(){
   int length;
 
-   char name_for_push[80];
-   char author_for_push[80];
-   int year_for_push;
    char name_for_remove[80];
+   int year_for_push;
 
     char name[80];
     char author[80];
@@ -103,9 +101,11 @@ int main(){
       case 3:
           getchar();
           printf("Input the title of the composition (up to 80 characters)\n");
+          char* name_for_push = (char* )malloc(80*sizeof(char));
           fgets(name_for_push, 80, stdin);
 
           printf("Input its author\n");
+          char* author_for_push = (char* )malloc(80*sizeof(char));
           fgets(author_for_push, 80, stdin);
               
           printf("Input the year of its release\n");
@@ -175,17 +175,13 @@ MusicalComposition* createMusicalCompositionList(char** array_names, char** arra
     MusicalComposition* head = NULL;
 
   for(i = 0; i < n; i++){
-    MusicalComposition* current = (MusicalComposition*) malloc(sizeof(MusicalComposition)); 
+    MusicalComposition* current = createMusicalComposition(array_names[i], array_authors[i], array_years[i]); 
     if (head == NULL)
         head = current;
-    else
+    else {
         prev->next = current;
-
-    current->next = NULL;
-    current->name = array_names[i];
-    current->author = array_authors[i];
-    current->year = array_years[i];
-    current->prev = prev;
+    	current->prev = prev;
+    }
     prev = current;
   }  
   return head;  
@@ -198,6 +194,7 @@ void push(MusicalComposition** head_p, MusicalComposition* element){
   else {
     for(;head->next != NULL; head = head->next); 
     head->next = element;
+    element->prev = head;
     }
 }
 
